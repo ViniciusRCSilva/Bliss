@@ -9,8 +9,8 @@ import LateralImage from '../../public/imagem_lateral_cadastro.svg'
 
 export default function Register() {
     return (
-        <div className="flex flex-col md:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none justify-center items-center h-screen text-gray animate-screenOpacity">
-            <div className="md:flex flex-col hidden text-white bg-green-blue w-[60%] h-full items-center justify-center gap-4 px-5">
+        <div className="flex flex-col lg:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none md:justify-center justify-start pt-[10vh] md:pt-0 items-center h-screen text-gray animate-screenOpacity">
+            <div className="lg:flex flex-col hidden text-white bg-green-blue w-[60%] h-full items-center justify-center gap-4 px-5">
                 <Image src={LateralImage} alt="Image lateral" width={500}/>
                 <p className="text-3xl font-medium">Novo por aqui?</p>
                 <p className="text-xl font-light text-center">Crie uma conta no Bliss para desbloquear uma experiência personalizada de bem-estar, projetada para ajudá-lo a alcançar seus objetivos de saúde mental e física.</p>

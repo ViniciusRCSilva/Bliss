@@ -8,7 +8,7 @@ import LateralImage from '../../public/imagem_lateral_login.svg'
 
 export default function Login() {
     return (
-        <div className="flex flex-col md:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain md:bg-none justify-center items-center w-full h-screen text-gray animate-screenOpacity">
+        <div className="flex flex-col md:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none justify-center items-center w-full h-screen text-gray animate-screenOpacity">
             <div className="md:flex flex-col hidden text-white bg-green-blue w-[60%] h-full items-center justify-center gap-4 px-5">
                 <Image src={LateralImage} alt="Image lateral" width={500}/>
                 <p className="text-3xl font-medium">Seja bem-vindo(a)!</p>

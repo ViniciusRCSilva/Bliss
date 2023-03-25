@@ -9,7 +9,7 @@ import LateralImage from '../../public/imagem_lateral_cadastro.svg'
 
 export default function Register() {
     return (
-        <div className="flex flex-col lg:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none md:justify-center justify-start pt-[10vh] md:pt-0 items-center h-screen text-gray animate-screenOpacity">
+        <div className="flex flex-col lg:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none md:justify-center justify-start pt-[4vh] md:pt-0 items-center h-screen text-gray animate-screenOpacity">
             <div className="lg:flex flex-col hidden text-white bg-green-blue w-[60%] h-full items-center justify-center gap-4 px-5">
                 <Image src={LateralImage} alt="Image lateral" width={500}/>
                 <p className="text-3xl font-medium">Novo por aqui?</p>

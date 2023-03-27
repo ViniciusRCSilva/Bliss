@@ -19,7 +19,7 @@ export default function Home() {
     {
       id: 'sad',
       visible: false,
-      message: 'Poxa, que pena... Por que não tenta fazer isso:'
+      message: 'Poxa que pena... por que não tenta fazer isso:'
     },
     {
       id: 'neutral',
@@ -60,15 +60,15 @@ export default function Home() {
               {optionList.map((opt, index) => {
                 if (opt.id === 'sad') {
                   return (
-                    <SmileySad onClick={() => handleOpenMessage(index)} className={opt.id === visible?.id ? visible?.color : 'text-gray'} />
+                    <SmileySad key={index} onClick={() => handleOpenMessage(index)} className={opt.id === visible?.id ? visible?.color : 'text-gray'} />
                   )
                 } else if (opt.id === 'neutral') {
                   return (
-                    <SmileyMeh onClick={() => handleOpenMessage(index)} className={opt.id === visible?.id ? visible?.color : 'text-gray'} />
+                    <SmileyMeh key={index} onClick={() => handleOpenMessage(index)} className={opt.id === visible?.id ? visible?.color : 'text-gray'} />
                   )
                 } else if (opt.id === 'happy') {
                   return (
-                    <Smiley onClick={() => handleOpenMessage(index)} className={opt.id === visible?.id ? visible?.color : 'text-gray'} />
+                    <Smiley key={index} onClick={() => handleOpenMessage(index)} className={opt.id === visible?.id ? visible?.color : 'text-gray'} />
                   )
                 }
               })}

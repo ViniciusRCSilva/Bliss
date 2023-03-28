@@ -4,8 +4,9 @@ import Link from "next/link";
 interface NavigateProps{
     back: string
     linkBack: string
-    next: string
-    linkNext: string
+    next?: string
+    linkNext?: string
+    visible?: string
 }
 
 export function Navigate(props: NavigateProps){
@@ -23,7 +24,7 @@ export function Navigate(props: NavigateProps){
             <Link href={`/${props.linkNext}`}>
               <div className="flex items-center text-green-blue">
                 <p>{props.next}</p>
-                <CaretRight/>
+                <CaretRight className={`${props.visible}`}/>
               </div>
             </Link>
           </div>

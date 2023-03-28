@@ -45,8 +45,8 @@ export default function Account() {
                 <div className="flex flex-col items-start gap-3">
                     <LinkUser link="" icon={<House />} linkName="Início" />
                     <LinkUser link="habits" icon={<ArrowsCounterClockwise />} linkName="Hábitos" />
-                    <LinkUser link="" icon={<BookBookmark />} linkName="Diário" />
-                    <LinkUser link="" icon={<Phone />} linkName="Contatos de ajuda" />
+                    <LinkUser link="diary" icon={<BookBookmark />} linkName="Diário" />
+                    <LinkUser link="contacts" icon={<Phone />} linkName="Contatos de ajuda" />
                 </div>
             </div>
           </div>

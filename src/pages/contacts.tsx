@@ -15,10 +15,10 @@ export default function Contacts() {
         <GreenBg>
             <div className="flex flex-col w-[90%] justify-center items-center gap-5">
                 <p className="font-medium text-xl lg:text-4xl">Contatos de ajuda</p>
-                <div className="flex gap-2">
-                    <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
+                <div className="flex w-full justify-center items-center gap-2 lg:gap-5">
+                    <Image src={Img} alt="Imagem frase do dia" width={250} className="hidden lg:flex" />
                     <Image src={Img} alt="Imagem frase do dia" width={100} className="flex lg:hidden" />
-                    <p className="text-xs lg:text-2xl lg:font-light">
+                    <p className="text-xs lg:text-2xl lg:font-light lg:w-[50%]">
                         Pedir ajuda psicológica é essencial para resolver problemas e melhorar a saúde mental. 
                         O apoio profissional pode ajudar a lidar com emoções, enfrentar dificuldades e prevenir doenças mentais. 
                         É importante buscar ajuda quando os problemas emocionais começam a afetar o dia a dia e o bem-estar da pessoa, pois o psicólogo é capacitado para promover a saúde mental e o bem-estar.

@@ -13,7 +13,7 @@ export default function Habits(){
                     <Habit/>
                 </div>
 
-                <Navigate back="Início" linkBack="" next="Diário" linkNext="" />
+                <Navigate back="Início" linkBack="" next="Diário" linkNext="diary" />
             </div>
         </div>
     )

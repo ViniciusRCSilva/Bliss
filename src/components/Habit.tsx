@@ -3,7 +3,7 @@ import { Eye, NotePencil, Plus, X } from "@phosphor-icons/react";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Select } from "./Select";
 
 const weekDays = [
@@ -45,17 +45,17 @@ export function Habit(){
                     <div className="flex w-full justify-between" key={`${weekDay}-${i}`}>
                         <p className="text-2xl p-3">{weekDay.short}</p>
             
-                        <div className="flex items-center justify-center border-2 border-green-blue rounded-lg gap-4 p-3">
-                            <div onClick={() => handleClickOpen(weekDay.long)} className="flex items-center gap-1 cursor-pointer">
-                                <Plus className="text-green-blue text-2xl" />
-                                <p className="text-xl">Criar</p>
-                            </div>                           
+                        <div className="flex items-center justify-center border-2 border-green-blue rounded-lg p-2">
+                            <div onClick={() => handleClickOpen(weekDay.long)} className="flex items-center gap-1 cursor-pointer pr-4 border-r-2 border-green-blue">
+                                <Plus className="text-green-blue text-xl lg:text-2xl" />
+                                <p className="text-lg lg:text-xl">Criar</p>
+                            </div>                    
             
-                            <div className="">
+                            <div className="flex items-center justify-center px-4 border-r-2 border-green-blue">
                                 <NotePencil className="text-green-blue text-3xl" />
                             </div>
             
-                            <div>
+                            <div className="flex items-center justify-center pl-4">
                                 <Eye className="text-green-blue text-3xl" />
                             </div>
                         </div>

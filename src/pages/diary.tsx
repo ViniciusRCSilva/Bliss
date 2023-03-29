@@ -4,6 +4,14 @@ import { Topbar } from "@/components/Topbar";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 export default function Diary(){
+    const date = new Date()
+
+    function getMonth(m: number){
+        let month = ("0" + (m+1)).slice(-2)
+
+        return month
+    }
+
     return(
         <div className="animate-screenOpacity">
             <Topbar />
@@ -15,8 +23,8 @@ export default function Diary(){
                         </div>
 
                         <div className="flex flex-col justify-center items-center">
-                            <p className="font-light">Dia 15/03</p>
-                            <p className="text-lg">2023</p>
+                            <p className="font-light">Dia {date.getDate()}/{getMonth(date.getMonth())}</p>
+                            <p className="text-lg">{date.getFullYear()}</p>
                         </div>
 
                         <div className="flex w-9 h-9 justify-center items-center text-white bg-green-blue rounded-full">

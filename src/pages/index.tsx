@@ -84,7 +84,7 @@ export default function Home() {
               </div>
 
               {visible && (
-                <div className={`font-light overflow-y-auto h-[20vh] lg:h-[30vh] scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-full scrollbar-thumb-green-blue scrollbar-thumb-rounded-full animate-screenOpacity`}>
+                <div className={`font-light overflow-y-auto h-[20vh] lg:h-[30vh] border-2 border-green-blue rounded-lg scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity`}>
                   {visible.message}
                 </div>
               )}

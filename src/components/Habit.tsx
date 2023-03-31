@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 
 import { useState } from "react";
 import { Select } from "./Select";
+import Router from "next/router";
 
 const weekDays = [
     { short: 'Dom', long: 'Domingo' },
@@ -16,9 +17,16 @@ const weekDays = [
     { short: 'Sáb', long: 'Sábado' },
 ]
 
+export let dayName = ''
+
 export function Habit(){
     const [open, setOpen] = useState(false);
     const [day, setDay] = useState('');
+
+    const handleGetDayName = (dName: string, weekDay: string) => {
+        dayName = dName
+        Router.push(`/habitList/habit_${weekDay}`)
+    }
 
     const handleClickOpen = (d: string) => {
         setDay(d)
@@ -51,11 +59,11 @@ export function Habit(){
                                 <p className="text-lg lg:text-xl">Criar</p>
                             </div>                    
             
-                            <div className="flex items-center justify-center px-4 border-r-2 border-green-blue">
+                            <div className="flex items-center justify-center px-4 border-r-2 border-green-blue cursor-pointer">
                                 <NotePencil className="text-green-blue text-3xl" />
                             </div>
-            
-                            <div className="flex items-center justify-center pl-4">
+
+                            <div onClick={() => handleGetDayName(weekDay.long, weekDay.long)} className="flex items-center justify-center pl-4 cursor-pointer">
                                 <Eye className="text-green-blue text-3xl" />
                             </div>
                         </div>

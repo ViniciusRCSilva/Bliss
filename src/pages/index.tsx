@@ -1,5 +1,8 @@
 import { GreenBg } from "@/components/GreenBg";
+import { HappyAnswer } from "@/components/HappyAnswer";
 import { Navigate } from "@/components/Navigate";
+import { NeutralAnswer } from "@/components/NeutralAnswer";
+import { SadAnswer } from "@/components/SadAnswer";
 import { Topbar } from "@/components/Topbar";
 import { Smiley, SmileyMeh, SmileySad } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -11,7 +14,8 @@ interface VisibleProps {
   id: 'sad' | 'neutral' | 'happy'
   visible: boolean
   color?: string
-  message: string
+  disable: boolean
+  message: any
 }
 
 export default function Home() {
@@ -19,24 +23,27 @@ export default function Home() {
     {
       id: 'sad',
       visible: false,
-      message: 'Poxa que pena... por que não tenta fazer isso:'
+      message: <SadAnswer/>,
+      disable: false
     },
     {
       id: 'neutral',
       visible: false,
-      message: 'Teste 2'
+      message: <NeutralAnswer/>,
+      disable: false
     },
     {
       id: 'happy',
       visible: false,
-      message: 'Que bom que você está feliz! Continue assim!'
+      message: <HappyAnswer/>,
+      disable: false
     },
   ]
 
   const [visible, setVisible] = useState<VisibleProps>()
 
   function handleOpenMessage(index: number) {
-    setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors'})
+    setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true})
   }
 
   return (
@@ -49,7 +56,7 @@ export default function Home() {
             <p className="font-medium text-xl lg:text-4xl">Frase do dia</p>
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
-            <p className="text-center text-sm lg:text-2xl lg:font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, facere aperiam. Aliquam odio dolorem omnis animi, ab similique totam impedit distinctio.</p>
+            <p className="text-center text-sm lg:text-2xl lg:font-light">"Escolha a gratidão em vez do medo, o amor em vez do ódio, e a compaixão em vez do julgamento, e veja como sua vida se transforma para melhor."</p>
           </div>
         </GreenBg>
 
@@ -58,27 +65,27 @@ export default function Home() {
             <div className="flex flex-col w-[80%] items-center gap-5">
               <p className="text-xl">Como está se sentindo hoje?</p>
 
-              <div className="flex w-full justify-evenly items-center text-5xl">
+              <div className="flex w-full justify-evenly items-center text-4xl lg:text-5xl">
                 {optionList.map((opt, index) => {
                   if (opt.id === 'sad') {
                     return (
-                      <SmileySad key={index} onClick={() => handleOpenMessage(index)} className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} cursor-pointer lg:hover:scale-105 lg:transition-transform`} />
+                      <button onClick={() => handleOpenMessage(index)} key={index} disabled={visible?.disable}><SmileySad className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform`} /></button>
                     )
                   } else if (opt.id === 'neutral') {
                     return (
-                      <SmileyMeh key={index} onClick={() => handleOpenMessage(index)} className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} cursor-pointer lg:hover:scale-105 lg:transition-transform`} />
+                      <button onClick={() => handleOpenMessage(index)} key={index} disabled={visible?.disable}><SmileyMeh className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform`} /></button>
                     )
                   } else if (opt.id === 'happy') {
                     return (
-                      <Smiley key={index} onClick={() => handleOpenMessage(index)} className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} cursor-pointer lg:hover:scale-105 lg:transition-transform`} />
+                      <button onClick={() => handleOpenMessage(index)} key={index} disabled={visible?.disable}><Smiley className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform`} /></button>
                     )
                   }
                 })}
               </div>
 
               {visible && (
-                <div className={`font-light animate-screenOpacity`}>
-                  <p>{visible.message}</p>
+                <div className={`font-light overflow-y-auto h-[20vh] lg:h-[30vh] scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-full scrollbar-thumb-green-blue scrollbar-thumb-rounded-full animate-screenOpacity`}>
+                  {visible.message}
                 </div>
               )}
               

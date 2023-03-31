@@ -3,6 +3,7 @@ import { Topbar } from "@/components/Topbar"
 
 import { dayName } from "@/components/Habit"
 import { Task } from "@/components/Task"
+import { NotePencil } from "@phosphor-icons/react"
 
 export default function HabitList(){
     return(
@@ -10,7 +11,13 @@ export default function HabitList(){
             <Topbar />
             <div className="flex flex-col w-full h-screen justify-evenly items-center pt-16 gap-5 bg-white">
                 <div className="flex flex-col w-[90%] lg:w-[80%] gap-5">
-                    <p className="text-xl">{dayName}</p>
+                    <div className="flex justify-between items-center">
+                        <p className="text-xl">{dayName}</p>
+
+                        <div className="flex justify-center items-center w-10 h-10 border-2 border-green-blue rounded-lg">
+                            <NotePencil className="text-3xl text-green-blue" />
+                        </div>
+                    </div>
 
                     <div className="flex flex-col h-[60vh] gap-5 p-2 py-5 lg:p-5 overflow-y-auto scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg">
                         <Task hour="06:00" taskName="Teste" />

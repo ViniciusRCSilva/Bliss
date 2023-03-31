@@ -1,11 +1,11 @@
-import { Eye, NotePencil, Plus, X } from "@phosphor-icons/react";
+import { Clock, Eye, NotePencil, Plus, X } from "@phosphor-icons/react";
 
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
 import { useState } from "react";
-import { Select } from "./Select";
 import Router from "next/router";
+import Input from "./Input";
 
 const weekDays = [
     { short: 'Dom', long: 'Domingo' },
@@ -15,6 +15,18 @@ const weekDays = [
     { short: 'Qui', long: 'Quinta' },
     { short: 'Sex', long: 'Sexta' },
     { short: 'Sáb', long: 'Sábado' },
+]
+
+const examplesList = [
+    'Estudar', 
+    'Comer', 
+    'Dormir', 
+    'Descansar', 
+    'Caminhar', 
+    'Exercitar', 
+    'Ler', 
+    'Ouvir música', 
+    'Trabalhar',
 ]
 
 export let dayName = ''
@@ -33,18 +45,9 @@ export function Habit(){
         setOpen(true);
     };
     
-      const handleClose = () => {
+    const handleClose = () => {
         setOpen(false);
     };
-
-    function GenerateHourList(HourNumber: number) {
-        let HourList = [];
-        for (let i = 5; i < HourNumber; i++) {
-          let hour = ("0" + i).slice(-2) + ":00";
-          HourList.push(hour);
-        }
-        return HourList;
-    }
 
     return(
         <>
@@ -86,23 +89,21 @@ export function Habit(){
                             <p className="text-xl font-medium">{day},</p>
 
                             <p>meu novo hábito das:</p>
-                            <Select>
-                                {GenerateHourList(24).map((hour, i) => {
-                                    return(
-                                        <option key={i} value={`${hour}`}>{hour}</option>
-                                    )
-                                })}
-                            </Select>
+                            <Input type="time" icon={<Clock/>} />
 
                             <p>vai ser:</p>
 
-                            <input type="text" className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg" />
+                            <input type="text" placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`} className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg" />
                         </div>
 
-                        <button className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
-                            Criar
-                            <Plus weight="bold" className="text-xl" />
-                        </button>
+                        <div className="flex w-full justify-between items-end">
+                            <button className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                Criar
+                                <Plus weight="bold" className="text-xl" />
+                            </button>
+
+                            <p onClick={handleClose} className="text-gray underline cursor-pointer">Cancelar</p>
+                        </div>
                     </div>
                 </DialogContent>
             </Dialog>

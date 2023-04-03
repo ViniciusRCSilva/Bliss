@@ -6,6 +6,12 @@ import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 export default function Diary(){
     const date = new Date()
 
+    function getDay(d: number){
+        let day = ("0" + d).slice(-2)
+
+        return day
+    }
+
     function getMonth(m: number){
         let month = ("0" + (m+1)).slice(-2)
 
@@ -23,7 +29,7 @@ export default function Diary(){
                         </div>
 
                         <div className="flex flex-col justify-center items-center">
-                            <p className="font-light">Dia {date.getDate()}/{getMonth(date.getMonth())}</p>
+                            <p className="font-light">Dia {getDay(date.getDate())}/{getMonth(date.getMonth())}</p>
                             <p className="text-lg">{date.getFullYear()}</p>
                         </div>
 

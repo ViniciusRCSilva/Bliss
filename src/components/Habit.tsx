@@ -35,9 +35,14 @@ export function Habit(){
     const [open, setOpen] = useState(false);
     const [day, setDay] = useState('');
 
-    const handleGetDayName = (dName: string, weekDay: string) => {
+    const handleVisualizeDay = (dName: string, weekDay: string) => {
         dayName = dName
         Router.push(`/habitList/habit_${weekDay}`)
+    }
+
+    const handleEditDay = (dName: string, weekDay: string) => {
+        dayName = dName
+        Router.push(`/habitList/edit/habit_${weekDay}`)
     }
 
     const handleClickOpen = (d: string) => {
@@ -62,11 +67,11 @@ export function Habit(){
                                 <p className="text-lg lg:text-xl">Criar</p>
                             </div>                    
             
-                            <div className="flex items-center justify-center px-4 border-r-2 border-green-blue cursor-pointer">
+                            <div onClick={() => handleEditDay(weekDay.long, weekDay.long)} className="flex items-center justify-center px-4 border-r-2 border-green-blue cursor-pointer">
                                 <NotePencil className="text-green-blue text-3xl" />
                             </div>
 
-                            <div onClick={() => handleGetDayName(weekDay.long, weekDay.long)} className="flex items-center justify-center pl-4 cursor-pointer">
+                            <div onClick={() => handleVisualizeDay(weekDay.long, weekDay.long)} className="flex items-center justify-center pl-4 cursor-pointer">
                                 <Eye className="text-green-blue text-3xl" />
                             </div>
                         </div>

@@ -4,8 +4,13 @@ import { Topbar } from "@/components/Topbar"
 import { dayName } from "@/components/Habit"
 import { Task } from "@/components/Task"
 import { NotePencil } from "@phosphor-icons/react"
+import Router from "next/router"
 
 export default function HabitList(){
+    const handleEditDay = (weekDay: string) => {
+        Router.push(`/habitList/edit/habit_${weekDay}`)
+    }
+
     return(
         <div className="animate-screenOpacity">
             <Topbar />
@@ -14,7 +19,7 @@ export default function HabitList(){
                     <div className="flex justify-between items-center">
                         <p className="text-xl">{dayName}</p>
 
-                        <div className="flex justify-center items-center w-10 h-10 border-2 border-green-blue rounded-lg">
+                        <div onClick={() => handleEditDay(dayName)} className="flex justify-center items-center w-10 h-10 border-2 border-green-blue rounded-lg cursor-pointer">
                             <NotePencil className="text-3xl text-green-blue" />
                         </div>
                     </div>

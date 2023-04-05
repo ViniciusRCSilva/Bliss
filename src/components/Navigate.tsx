@@ -11,7 +11,7 @@ interface NavigateProps{
 
 export function Navigate(props: NavigateProps){
     return(
-        <div className="flex w-full items-center justify-center">
+        <div className="flex w-full items-center justify-center select-none">
 
           <div className="flex w-[80%] justify-between text-lg">
             <Link href={`/${props.linkBack}`}>

@@ -18,7 +18,7 @@ export function TextDiary(){
 
     return(
         <>
-            <div>
+            <div className="select-none">
                 <div className="flex items-center justify-center gap-2">
                     <p className="lg:text-lg font-light">Escreva aqui como foi seu dia</p>
                     <SmileyWink className="text-3xl text-green-blue"/>

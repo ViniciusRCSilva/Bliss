@@ -1,5 +1,5 @@
 import { Navigate } from "@/components/Navigate";
-import { TextDiary } from "@/components/TextDiary";
+import { AddNote } from "@/components/AddNote";
 import { Topbar } from "@/components/Topbar";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { useState } from "react";
@@ -107,7 +107,7 @@ export default function Diary(){
 
                     {day == getDay(date.getDate()) && month == getMonth(date.getMonth()+1) && year == date.getFullYear() ? (
                         <div className="animate-screenOpacity">
-                            <TextDiary />
+                            <AddNote />
                         </div>
                     ): (
                         <div className="overflow-y-auto select-none">

@@ -1,13 +1,27 @@
 import { GreenBg } from "@/components/GreenBg";
 import { LinkUser } from "@/components/LinksUser";
 import { Topbar } from "@/components/Topbar";
-import { ArrowsCounterClockwise, BookBookmark, House, PencilSimple, Phone, Smiley, SmileyMeh, SmileySad } from "@phosphor-icons/react";
+import { ArrowsCounterClockwise, Baby, BookBookmark, Check, EnvelopeSimple, House, MapTrifold, Password, PencilSimple, Phone, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
 import Image from "next/image";
-import Link from "next/link";
+
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 
 import Img from '../../public/usuário.svg'
+import { useState } from "react";
+import Input from "@/components/Input";
 
 export default function Account() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+      setOpen(true);
+  };
+  
+  const handleClose = () => {
+      setOpen(false);
+  };
+
   return (
     <div className="animate-screenOpacity">
       <Topbar />
@@ -15,12 +29,59 @@ export default function Account() {
       <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-5 bg-white">
         <GreenBg>
             <div className="flex flex-col w-full gap-5 items-end">
-                <Link href='/' className="flex items-center gap-3 mr-10">                
+                <div onClick={handleClickOpen} className="flex items-center gap-3 mr-10 cursor-pointer">                
                     <div className="flex justify-center items-center rounded-full w-10 h-10 bg-white text-green-blue text-3xl">
                         <PencilSimple weight="bold" />
                     </div>
                     <p className="hidden lg:flex underline">Edite seu perfil</p>
-                </Link>
+                </div>
+
+                <Dialog
+                open={open}
+                onClose={handleClose}
+                >
+                  <div className="flex flex-col lg:w-[30vw]">
+                      <div className="flex w-full justify-end p-4 pb-0">
+                          <X onClick={handleClose} weight="bold" className="text-green-blue text-2xl cursor-pointer"/>
+                      </div>
+
+                      <DialogContent>
+                          <div className="flex flex-col justify-center items-start gap-10">
+
+                              <div className="flex flex-col items-center justify-center w-full">
+                                <div className="flex flex-col w-[80%] items-center justify-center gap-4">
+                                  <div className="flex items-center gap-2">
+                                    <p className="text-xl font-medium">Editando seu perfil</p>
+                                    <PencilSimple className="text-2xl text-green-blue" />
+                                  </div>
+
+                                  <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value="Usuário da Silva" />
+                                  <Input icon={<MapTrifold/>} type="text" placeholder="Estado" value="São Paulo" />
+                                  <div className="flex flex-col w-full">
+                                    <p>Data de nascimento</p>
+                                    <Input icon={<Baby/>} type="date" disabled value="2000-06-02" />
+                                  </div>
+                                  <Input icon={<EnvelopeSimple/>} type="email" placeholder="Email" value="exemplo@gmail.com" disabled />
+                                  <div className="flex flex-col w-full gap-2">
+                                    <Input icon={<Password/>} type="password" placeholder="Senha" value="senha_forte123" disabled />
+                                    <p className="text-green-blue font-light underline cursor-pointer">Solicitar troca de senha</p>
+                                    <p className="text-sm text-red-600 font-light">* Após solicitar a troca de senha, será enviado um e-mail contendo um link para redirecionamento à tela de troca de senha.</p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="flex w-full justify-between items-end">
+                                  <button className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                      Salvar
+                                      <Check weight="bold" className="text-xl" />
+                                  </button>
+
+                                  <p onClick={handleClose} className="text-gray underline cursor-pointer">Cancelar</p>
+                              </div>
+                          </div>
+                      </DialogContent>
+                  </div>
+                </Dialog>
 
                 <div className="flex w-full justify-center items-center gap-5">
                     <Image src={Img} alt="Imagem frase do dia" width={200} className="hidden lg:flex" />

@@ -10,11 +10,11 @@ export default function Diary(){
     const [month, setMonth] = useState<string>(getMonth(date.getMonth()+1))
     const [year, setYear] = useState<any>(date.getFullYear())
 
-    let previousMonth = parseInt(month!)
+    let numberMonth = parseInt(month!)
 
-    let PreviousLastDayOfMonth = new Date(year, previousMonth-1, 0).getDate()
+    let PreviousLastDayOfMonth = new Date(year, numberMonth-1, 0).getDate()
 
-    let AfterLastDayOfMonth = new Date(year, previousMonth, 0).getDate()
+    let AfterLastDayOfMonth = new Date(year, numberMonth, 0).getDate()
 
     function getDay(d: number){
         let day = ("0" + d).slice(-2)

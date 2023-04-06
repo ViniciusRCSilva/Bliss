@@ -35,8 +35,6 @@ export default function Diary(){
 
         let previousDay = today - 1
 
-        console.log('hoje: '+ today +' | dia anterior: '+ previousDay +' | mês: '+ month +' | último dia do mês passado: '+ PreviousLastDayOfMonth)
-
         if(previousDay < 1){
             setDay(getDay(PreviousLastDayOfMonth))
             
@@ -61,8 +59,6 @@ export default function Diary(){
         let actualMonth = parseInt(month)
 
         let afterDay = today + 1
-
-        console.log('hoje: '+ today +' | dia depois: '+ afterDay +' | mês: '+ month +' | último dia desse mês: '+ AfterLastDayOfMonth)
 
         if(afterDay > AfterLastDayOfMonth){
             setDay('01')

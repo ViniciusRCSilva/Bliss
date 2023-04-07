@@ -1,10 +1,11 @@
 import { GreenBg } from "@/components/GreenBg";
 import { Navigate } from "@/components/Navigate";
-import { Select } from "@/components/Select";
 import { Topbar } from "@/components/Topbar";
 import Image from "next/image";
+import { BrazilStates } from "@/components/BrazilStates";
 
 import Img from '../../public/imagem_contatos.svg'
+import { ContactBox } from "@/components/ContactBox";
 
 export default function Contacts() {
   return (
@@ -32,13 +33,18 @@ export default function Contacts() {
             <div className="flex flex-col w-[80%] gap-5">
                 <p>Em qual estado você mora?</p>
             
-                <Select>
-                    <option value="" selected></option>
-                    <option>Acre</option>
-                    <option>Amazonas</option>
-                    <option>Amapá</option>
-                    <option>Brasília</option>
-                </Select>
+                <BrazilStates/>
+
+                <p>Principais contatos:</p>
+                <div className="flex flex-col w-full h-[20vh] lg:h-[30vh] p-2 overflow-y-auto items-center justify-start gap-6 scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity">
+                  <ContactBox/>
+                  <ContactBox/>
+                  <ContactBox/>
+                  <ContactBox/>
+                  <ContactBox/>
+                  <ContactBox/>
+                  <ContactBox/>
+                </div>
             </div>
           </div>
 

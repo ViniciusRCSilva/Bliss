@@ -32,8 +32,10 @@ export default function Contacts() {
           <div className="flex w-full h-[35.5vh] lg:h-[90%] lg:items-center justify-center">
             <div className="flex flex-col w-[80%] gap-5">
                 <p>Em qual estado você mora?</p>
-            
-                <BrazilStates/>
+
+                <div className="lg:w-[60%]">
+                  <BrazilStates/>
+                </div>
 
                 <p>Principais contatos:</p>
                 <div className="flex flex-col w-full h-[20vh] lg:h-[30vh] p-2 overflow-y-auto items-center justify-start gap-6 scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity">

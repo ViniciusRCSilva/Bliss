@@ -1,5 +1,5 @@
 import Input from "@/components/Input";
-import { EnvelopeSimple, Password, SmileyWink } from "@phosphor-icons/react";
+import { Baby, EnvelopeSimple, Password, SmileyWink } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
@@ -29,6 +29,11 @@ export default function Register() {
 
                         <Input icon={<EnvelopeSimple/>} type="email" placeholder="Email" />
                         
+                        <div className="flex flex-col">
+                            <p>Data de nascimento</p>
+                            <Input icon={<Baby/>} type="date" />
+                        </div>
+
                         <Input icon={<Password/>} type="password" placeholder="Senha" />
                     </div>
 

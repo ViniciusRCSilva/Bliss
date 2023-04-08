@@ -1,11 +1,11 @@
-import Input from "@/components/Input";
 import { Select } from "@/components/Select";
-import { Baby, MapTrifold, SmileyWink } from "@phosphor-icons/react";
+import { SmileyWink } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 
 import Logo from '../../public/logo_bliss.svg'
 import LateralImage from '../../public/imagem_lateral_cadastro.svg'
+import { BrazilStates } from "@/components/BrazilStates";
 
 export default function AdditionalInfo() {
     return (
@@ -32,14 +32,12 @@ export default function AdditionalInfo() {
                     </div>
 
                     <div className="flex flex-col gap-5">
-                        <div className="flex flex-col">
-                            <p>Data de nascimento</p>
-                            <Input icon={<Baby/>} type="date" />
+                        <div>
+                            <p>Qual é o estado em que você mora?</p>
+                            <BrazilStates/>
                         </div>
-                        
-                        <Input icon={<MapTrifold/>} type="text" placeholder="Estado" />
 
-                        <div className="flex flex-col">
+                        <div>
                             <p>Como você descobriu o Bliss?</p>
                             <Select>
                                 <option value="" selected></option>
@@ -54,7 +52,7 @@ export default function AdditionalInfo() {
                     <div className="flex w-full items-end justify-between">
                         <button className="bg-green-blue rounded-lg px-4 py-2 text-xl text-white shadow-md">CONTINUAR</button>
 
-                        <Link href={'/'} className="underline bg-white p-2 rounded-lg shadow-md md:shadow-none md:p-0">Pular</Link>
+                        <Link href={'/'} className="underline">Pular</Link>
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 import { GreenBg } from "@/components/GreenBg";
 import { LinkUser } from "@/components/LinksUser";
 import { Topbar } from "@/components/Topbar";
-import { ArrowsCounterClockwise, Baby, BookBookmark, Check, EnvelopeSimple, House, MapTrifold, Password, PencilSimple, Phone, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
+import { ArrowsCounterClockwise, Baby, BookBookmark, Check, EnvelopeSimple, House, Password, PencilSimple, Phone, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
 import Image from "next/image";
 
 import Dialog from '@mui/material/Dialog';
@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import Img from '../../public/usuário.svg'
 import { useState } from "react";
 import Input from "@/components/Input";
+import { BrazilStates } from "@/components/BrazilStates";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function Account() {
                                   </div>
 
                                   <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value="Usuário da Silva" />
-                                  <Input icon={<MapTrifold/>} type="text" placeholder="Estado" value="São Paulo" />
+                                  <BrazilStates/>
                                   <div className="flex flex-col w-full">
                                     <p>Data de nascimento</p>
                                     <Input icon={<Baby/>} type="date" disabled value="2000-06-02" />

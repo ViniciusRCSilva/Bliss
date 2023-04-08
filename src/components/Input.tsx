@@ -13,7 +13,7 @@ export default function Input(props: InputProps) {
                 {props.icon}
             </div>
 
-            <input type={props.type} defaultValue={props.value} disabled={props.disabled} placeholder={props.placeholder} className="w-[80%] bg-white text-green-dark pl-4 placeholder-gray focus:outline-none rounded-lg disabled:opacity-60 disabled:cursor-not-allowed" />
+            <input type={props.type} defaultValue={props.value} disabled={props.disabled} placeholder={props.placeholder} required className="w-[80%] bg-white text-green-dark pl-4 placeholder-gray focus:outline-none rounded-lg disabled:opacity-60 disabled:cursor-not-allowed" />
         </div>
     )
   }

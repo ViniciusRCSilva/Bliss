@@ -30,7 +30,7 @@ export default function Login() {
                     </div>
 
                     <div className="flex w-full justify-between items-center">
-                        <Link href='/'>
+                        <Link href='/forgotPassword'>
                             <p className="font-light text-sm underline">Esqueci minha senha</p>
                         </Link>
 

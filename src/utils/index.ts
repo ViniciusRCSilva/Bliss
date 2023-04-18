@@ -21,8 +21,9 @@ const authorList = [
 
 const authorListLength = authorList.length
 
+const aleatoryAuthor = authorList[randomInt(0, 14)]
+
 export {
     randomInt,
-    authorList,
-    authorListLength
+    authorList
 }

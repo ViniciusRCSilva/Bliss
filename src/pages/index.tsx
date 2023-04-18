@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import Img from '../../public/frase_do_dia.svg'
-import { authorList, randomInt } from "@/utils";
+import { randomAuthor, randomInt } from "@/utils";
 
 interface VisibleProps {
   id: 'sad' | 'neutral' | 'happy'
@@ -28,6 +28,10 @@ interface PhrasesProps {
 
 interface HomeProps {
   phrases: PhrasesProps[]
+}
+
+export function RandomizeAuthor(){
+  return randomAuthor
 }
 
 export default function Home({ phrases }: HomeProps) {
@@ -59,10 +63,12 @@ export default function Home({ phrases }: HomeProps) {
   }
 
   const [randomPhrase, setRandomPhrase] = useState<PhrasesProps>()
+  const [randomAuthor, setRandomAuthor] = useState('')
 
   useEffect(() => {
 
     setRandomPhrase(phrases[randomInt(1, 10)])
+    setRandomAuthor(RandomizeAuthor)
 
   }, [])
 
@@ -77,7 +83,7 @@ export default function Home({ phrases }: HomeProps) {
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
             <p className="text-center text-sm lg:text-2xl lg:font-light">"{randomPhrase?.texto}"</p>
-            <p className="text-center text-sm lg:text-2xl font-light">{randomPhrase?.autor}</p>
+            <p className="text-center text-sm lg:text-2xl font-light">{randomAuthor}</p>
           </div>
         </GreenBg>
 
@@ -123,7 +129,7 @@ export default function Home({ phrases }: HomeProps) {
 
 export const getStaticProps = async () => {
   const revalidate = 60 * 60 * 24 * 7;
-  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, 14)]}`)
+  const response = await fetch(`https://pensador-api.vercel.app/?term=${randomAuthor}`)
   const data = await response.json()
 
   return {

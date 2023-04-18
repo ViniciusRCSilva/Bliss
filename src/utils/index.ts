@@ -16,14 +16,13 @@ const authorList = [
     'Benjamin+Franklin',
     'Victor+Hugo',
     'Da+Vinci',
-    'Vinicius+Moraes',
 ]
 
 const authorListLength = authorList.length
 
-const aleatoryAuthor = authorList[randomInt(0, 14)]
+const randomAuthor = authorList[randomInt(0, authorListLength)]
 
 export {
     randomInt,
-    authorList
+    randomAuthor
 }

@@ -66,6 +66,8 @@ export default function Home({ phrases }: HomeProps) {
 
     setRandomPhrase(phrases[randomInt(1, 10)])
 
+    getStaticProps
+
   }, [])
 
   return (

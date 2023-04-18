@@ -10,7 +10,6 @@ const authorList = [
     'Nelson+Mandela',
     'Fernando+Pessoa',
     'Clarice+Lispector',
-    'Albert+Einstein',
     'Henry+Ford',
     'Sigmund+Freud',
     'Benjamin+Franklin',

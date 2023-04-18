@@ -60,6 +60,8 @@ export default function Home({ phrases }: HomeProps) {
 
   const [randomPhrase, setRandomPhrase] = useState<PhrasesProps>()
 
+  console.log(randomPhrase?.autor)
+
   useEffect(() => {
 
     setRandomPhrase(phrases[randomInt(1, 10)])

@@ -30,10 +30,6 @@ interface HomeProps {
   phrases: PhrasesProps[]
 }
 
-export function RandomizeAuthor(){
-  return randomAuthor
-}
-
 export default function Home({ phrases }: HomeProps) {
   const optionList: VisibleProps[] = [
     {
@@ -61,14 +57,12 @@ export default function Home({ phrases }: HomeProps) {
   function handleOpenMessage(index: number) {
     setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true })
   }
-
+  
   const [randomPhrase, setRandomPhrase] = useState<PhrasesProps>()
-  const [randomAuthor, setRandomAuthor] = useState('')
 
   useEffect(() => {
 
     setRandomPhrase(phrases[randomInt(1, 10)])
-    setRandomAuthor(RandomizeAuthor)
 
   }, [])
 
@@ -83,7 +77,7 @@ export default function Home({ phrases }: HomeProps) {
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
             <p className="text-center text-sm lg:text-2xl lg:font-light">"{randomPhrase?.texto}"</p>
-            <p className="text-center text-sm lg:text-2xl font-light">{randomAuthor}</p>
+            <p className="text-center text-sm lg:text-2xl font-light">{randomPhrase?.autor}</p>
           </div>
         </GreenBg>
 

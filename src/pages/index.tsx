@@ -123,7 +123,7 @@ export default function Home({ phrases }: HomeProps) {
 
 export const getStaticProps = async () => {
   const revalidate = 60 * 60 * 24 * 7;
-  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, authorListLength)]}&max=100`)
+  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, authorListLength)]}`)
   const data = await response.json()
 
   return {

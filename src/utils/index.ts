@@ -19,7 +19,10 @@ const authorList = [
     'Vinicius+Moraes',
 ]
 
+const authorListLength = authorList.length
+
 export {
     randomInt,
-    authorList
+    authorList,
+    authorListLength
 }

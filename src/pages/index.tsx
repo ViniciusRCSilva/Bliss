@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import Img from '../../public/frase_do_dia.svg'
-import { authorList, randomInt } from "@/utils";
+import { authorList, authorListLength, randomInt } from "@/utils";
 
 interface VisibleProps {
   id: 'sad' | 'neutral' | 'happy'
@@ -123,7 +123,7 @@ export default function Home({ phrases }: HomeProps) {
 
 export const getStaticProps = async () => {
   const revalidate = 60 * 60 * 24 * 7;
-  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, authorList.length)]}&max=100`)
+  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, authorListLength)]}&max=100`)
   const data = await response.json()
 
   return {

@@ -1,3 +1,5 @@
+'use client'
+
 import { GreenBg } from "@/components/GreenBg";
 import { HappyAnswer } from "@/components/HappyAnswer";
 import { Navigate } from "@/components/Navigate";
@@ -6,9 +8,10 @@ import { SadAnswer } from "@/components/SadAnswer";
 import { Topbar } from "@/components/Topbar";
 import { Smiley, SmileyMeh, SmileySad } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Img from '../../public/frase_do_dia.svg'
+import { authorList, randomInt } from "@/utils";
 
 interface VisibleProps {
   id: 'sad' | 'neutral' | 'happy'
@@ -18,24 +21,33 @@ interface VisibleProps {
   message: any
 }
 
-export default function Home() {
+interface PhrasesProps {
+  texto: string
+  autor: string
+}
+
+interface HomeProps {
+  phrases: PhrasesProps[]
+}
+
+export default function Home({ phrases }: HomeProps) {
   const optionList: VisibleProps[] = [
     {
       id: 'sad',
       visible: false,
-      message: <SadAnswer/>,
+      message: <SadAnswer />,
       disable: false
     },
     {
       id: 'neutral',
       visible: false,
-      message: <NeutralAnswer/>,
+      message: <NeutralAnswer />,
       disable: false
     },
     {
       id: 'happy',
       visible: false,
-      message: <HappyAnswer/>,
+      message: <HappyAnswer />,
       disable: false
     },
   ]
@@ -43,8 +55,16 @@ export default function Home() {
   const [visible, setVisible] = useState<VisibleProps>()
 
   function handleOpenMessage(index: number) {
-    setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true})
+    setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true })
   }
+
+  const [randomPhrase, setRandomPhrase] = useState<PhrasesProps>()
+
+  useEffect(() => {
+
+    setRandomPhrase(phrases[randomInt(1, 10)])
+
+  }, [])
 
   return (
     <div className="animate-screenOpacity">
@@ -56,7 +76,8 @@ export default function Home() {
             <p className="font-medium text-xl lg:text-4xl">Frase do dia</p>
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
-            <p className="text-center text-sm lg:text-2xl lg:font-light">"Escolha a gratidão em vez do medo, o amor em vez do ódio, e a compaixão em vez do julgamento, e veja como sua vida se transforma para melhor."</p>
+            <p className="text-center text-sm lg:text-2xl lg:font-light">"{randomPhrase?.texto}"</p>
+            <p className="text-center text-sm lg:text-2xl font-light">{randomPhrase?.autor}</p>
           </div>
         </GreenBg>
 
@@ -88,7 +109,7 @@ export default function Home() {
                   {visible.message}
                 </div>
               )}
-              
+
             </div>
           </div>
 
@@ -98,4 +119,17 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export const getStaticProps = async () => {
+  const revalidate = 60 * 60 * 24 * 7;
+  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, authorList.length)]}&max=100`)
+  const data = await response.json()
+
+  return {
+    props: {
+      phrases: data.frases
+    },
+    revalidate
+  }
 }

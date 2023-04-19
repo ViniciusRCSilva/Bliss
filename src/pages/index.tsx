@@ -9,9 +9,9 @@ import { Topbar } from "@/components/Topbar";
 import { Smiley, SmileyMeh, SmileySad } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import frases  from '@/utils/frases_motivacionais.json'
 
 import Img from '../../public/frase_do_dia.svg'
-import { authorList, authorListLength, randomInt } from "@/utils";
 
 interface VisibleProps {
   id: 'sad' | 'neutral' | 'happy'
@@ -21,16 +21,7 @@ interface VisibleProps {
   message: any
 }
 
-interface PhrasesProps {
-  texto: string
-  autor: string
-}
-
-interface HomeProps {
-  phrases: PhrasesProps[]
-}
-
-export default function Home({ phrases }: HomeProps) {
+export default function Home() {
   const optionList: VisibleProps[] = [
     {
       id: 'sad',
@@ -53,17 +44,14 @@ export default function Home({ phrases }: HomeProps) {
   ]
 
   const [visible, setVisible] = useState<VisibleProps>()
+  const [prhase, setPhrase] = useState('')
 
   function handleOpenMessage(index: number) {
     setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true })
   }
-  
-  const [randomPhrase, setRandomPhrase] = useState<PhrasesProps>()
 
   useEffect(() => {
-
-    setRandomPhrase(phrases[randomInt(1, 10)])
-
+    setPhrase(frases.frases_motivacionais[Math.floor(Math.random() * frases.frases_motivacionais.length)])
   }, [])
 
   return (
@@ -76,8 +64,7 @@ export default function Home({ phrases }: HomeProps) {
             <p className="font-medium text-xl lg:text-4xl">Frase do dia</p>
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
-            <p className="text-center text-sm lg:text-2xl lg:font-light">"{randomPhrase?.texto}"</p>
-            <p className="text-center text-sm lg:text-2xl font-light">{randomPhrase?.autor}</p>
+            <p className="text-center text-sm lg:text-2xl lg:font-light">"{prhase}"</p>
           </div>
         </GreenBg>
 
@@ -119,17 +106,4 @@ export default function Home({ phrases }: HomeProps) {
       </div>
     </div>
   )
-}
-
-export const getStaticProps = async () => {
-  const revalidate = 60 * 60 * 24 * 7;
-  const response = await fetch(`https://pensador-api.vercel.app/?term=${authorList[randomInt(0, authorListLength)]}&max=100`)
-  const data = await response.json()
-
-  return {
-    props: {
-      phrases: data.frases
-    },
-    revalidate
-  }
 }

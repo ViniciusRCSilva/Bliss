@@ -19,9 +19,8 @@ const authorList = [
 
 const authorListLength = authorList.length
 
-const randomAuthor = authorList[randomInt(0, authorListLength)]
-
 export {
     randomInt,
-    randomAuthor
+    authorList,
+    authorListLength
 }

@@ -44,15 +44,20 @@ export default function Home() {
   ]
 
   const [visible, setVisible] = useState<VisibleProps>()
-  const [randomPhrase, setRandomPhrase] = useState('Acredite em si mesmo e tudo será possível.')
+  const [randomPhrase, setRandomPhrase] = useState('')
+  let i
   const date = new Date
 
   function handleOpenMessage(index: number) {
     setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true })
   }
 
+  function handleChangePhrase(){
+    /* pensando na lógica ainda */
+  }
+
   useEffect(() => {
-    setRandomPhrase(frases.frases_motivacionais[Math.floor(Math.random() * frases.frases_motivacionais.length)])
+    setRandomPhrase(frases.frases_motivacionais[date.getDate()-1])
   }, [])
 
   function getFormat(n: number){

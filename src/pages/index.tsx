@@ -8,7 +8,7 @@ import { SadAnswer } from "@/components/SadAnswer";
 import { Topbar } from "@/components/Topbar";
 import { Smiley, SmileyMeh, SmileySad } from "@phosphor-icons/react";
 import Image from "next/image";
-import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import frases  from '@/utils/frases_motivacionais.json'
 
 import Img from '../../public/frase_do_dia.svg'
@@ -44,7 +44,7 @@ export default function Home() {
   ]
 
   const [visible, setVisible] = useState<VisibleProps>()
-  const [randomPhrase, setRandomPhrase] = useState('')
+  const [randomPhrase, setRandomPhrase] = useState('Acredite em si mesmo e tudo será possível.')
   const date = new Date
 
   function handleOpenMessage(index: number) {

@@ -6,8 +6,8 @@ import { useState } from "react";
 
 export default function Diary(){
     const date = new Date()
-    const [day, setDay] = useState<string>(getDay(date.getDate()))
-    const [month, setMonth] = useState<string>(getMonth(date.getMonth()+1))
+    const [day, setDay] = useState<string>(getFormat(date.getDate()))
+    const [month, setMonth] = useState<string>(getFormat(date.getMonth()+1))
     const [year, setYear] = useState<any>(date.getFullYear())
 
     let numberMonth = parseInt(month!)
@@ -16,14 +16,9 @@ export default function Diary(){
 
     let AfterLastDayOfMonth = new Date(year, numberMonth, 0).getDate()
 
-    function getDay(d: number){
-        let day = ("0" + d).slice(-2)
-        return day
-    }
-
-    function getMonth(m: number){
-        let month = ("0" + m).slice(-2)
-        return month
+    function getFormat(n: number){
+        let number = ("0" + n).slice(-2)
+        return number
     }
 
     function getPreviousDate(d: string, m: string){
@@ -36,10 +31,10 @@ export default function Diary(){
         let previousDay = today - 1
 
         if(previousDay < 1){
-            setDay(getDay(PreviousLastDayOfMonth))
+            setDay(getFormat(PreviousLastDayOfMonth))
             
             let previousMonth = actualMonth - 1
-            setMonth(getMonth(previousMonth))
+            setMonth(getFormat(previousMonth))
 
             if(previousMonth <= 0){
                 setMonth("12")
@@ -47,7 +42,7 @@ export default function Diary(){
                 setYear(date.getFullYear()-1)
             }
         }else{
-            setDay(getDay(previousDay))
+            setDay(getFormat(previousDay))
         }
     }
 
@@ -64,7 +59,7 @@ export default function Diary(){
             setDay('01')
             
             let afterMonth = actualMonth + 1
-            setMonth(getMonth(afterMonth))
+            setMonth(getFormat(afterMonth))
 
             if(afterMonth > 12){
                 setMonth("01")
@@ -72,7 +67,7 @@ export default function Diary(){
                 setYear(date.getFullYear())
             }
         }else{
-            setDay(getDay(afterDay))
+            setDay(getFormat(afterDay))
         }
     }
 
@@ -91,7 +86,7 @@ export default function Diary(){
                             <p className="text-lg">{year}</p>
                         </div>
 
-                        {day == getDay(date.getDate()) && month == getMonth(date.getMonth()+1) && year == date.getFullYear() ? (
+                        {day == getFormat(date.getDate()) && month == getFormat(date.getMonth()+1) && year == date.getFullYear() ? (
                             <div className="opacity-0 w-9 h-9">
                             </div>
                         ) : (
@@ -101,7 +96,7 @@ export default function Diary(){
                         )}
                     </div>
 
-                    {day == getDay(date.getDate()) && month == getMonth(date.getMonth()+1) && year == date.getFullYear() ? (
+                    {day == getFormat(date.getDate()) && month == getFormat(date.getMonth()+1) && year == date.getFullYear() ? (
                         <div className="animate-screenOpacity">
                             <AddNote />
                         </div>

@@ -8,7 +8,7 @@ import { SadAnswer } from "@/components/SadAnswer";
 import { Topbar } from "@/components/Topbar";
 import { Smiley, SmileyMeh, SmileySad } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from "react";
 import frases  from '@/utils/frases_motivacionais.json'
 
 import Img from '../../public/frase_do_dia.svg'
@@ -44,15 +44,21 @@ export default function Home() {
   ]
 
   const [visible, setVisible] = useState<VisibleProps>()
-  const [prhase, setPhrase] = useState('')
+  const [randomPhrase, setRandomPhrase] = useState('')
+  const date = new Date
 
   function handleOpenMessage(index: number) {
     setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true })
   }
 
   useEffect(() => {
-    setPhrase(frases.frases_motivacionais[Math.floor(Math.random() * frases.frases_motivacionais.length)])
+    setRandomPhrase(frases.frases_motivacionais[Math.floor(Math.random() * frases.frases_motivacionais.length)])
   }, [])
+
+  function getFormat(n: number){
+    let number = ("0" + n).slice(-2)
+    return number
+  }
 
   return (
     <div className="animate-screenOpacity">
@@ -62,9 +68,10 @@ export default function Home() {
         <GreenBg>
           <div className="flex flex-col w-[80%] justify-center items-center gap-3">
             <p className="font-medium text-xl lg:text-4xl">Frase do dia</p>
+            <p className="text-center text-sm lg:text-2xl lg:font-light">{getFormat(date.getDate())}/{getFormat(date.getMonth()+1)}/{date.getFullYear()}</p>
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
-            <p className="text-center text-sm lg:text-2xl lg:font-light">"{prhase}"</p>
+            <p className="text-center text-sm lg:text-2xl lg:font-light">"{randomPhrase}"</p>
           </div>
         </GreenBg>
 

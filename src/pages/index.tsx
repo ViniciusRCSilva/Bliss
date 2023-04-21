@@ -44,8 +44,7 @@ export default function Home() {
   ]
 
   const [visible, setVisible] = useState<VisibleProps>()
-  const [randomPhrase, setRandomPhrase] = useState('')
-  let i
+  const [todayPhrase, setTodayPhrase] = useState('')
   const date = new Date
 
   function handleOpenMessage(index: number) {
@@ -53,11 +52,35 @@ export default function Home() {
   }
 
   function handleChangePhrase(){
-    /* pensando na lógica ainda */
+    switch(date.getDay()){
+      case 0:
+        setTodayPhrase(frases.domingo[date.getDate()])
+        break;
+      case 1:
+        setTodayPhrase(frases.segunda[date.getDate()])
+        break;
+      case 2:
+        setTodayPhrase(frases.terca[date.getDate()])
+        break;
+      case 3:
+        setTodayPhrase(frases.quarta[date.getDate()])
+        break;
+      case 4:
+        setTodayPhrase(frases.quinta[date.getDate()])
+        break;
+      case 5:
+        setTodayPhrase(frases.sexta[date.getDate()])
+        break;
+      case 6:
+        setTodayPhrase(frases.sabado[date.getDate()])
+        break;
+      default:
+        setTodayPhrase('Não foi possível capturar a frase do dia')
+    }
   }
 
   useEffect(() => {
-    setRandomPhrase(frases.frases_motivacionais[date.getDate()-1])
+    handleChangePhrase()
   }, [])
 
   function getFormat(n: number){
@@ -76,7 +99,7 @@ export default function Home() {
             <p className="text-center text-sm lg:text-2xl lg:font-light">{getFormat(date.getDate())}/{getFormat(date.getMonth()+1)}/{date.getFullYear()}</p>
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
             <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
-            <p className="text-center text-sm lg:text-2xl lg:font-light">"{randomPhrase}"</p>
+            <p className="text-center text-sm lg:text-2xl lg:font-light">"{todayPhrase}"</p>
           </div>
         </GreenBg>
 

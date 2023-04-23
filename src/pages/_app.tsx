@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className={lexend.className}>
         <Component {...pageProps} />
       </div>
+
     </>
   )
 }

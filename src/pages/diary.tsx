@@ -74,7 +74,7 @@ export default function Diary(){
     return(
         <div className="animate-screenOpacity">
             <Topbar />
-            <div className="flex flex-col w-full h-screen justify-evenly items-center pt-16 gap-5 bg-white">
+            <div className="flex flex-col w-full h-screen justify-between items-center pt-28 gap-5 bg-white">
                 <div className="flex flex-col w-[80%] h-[80%] gap-10">
                     <div className="flex w-full items-center justify-between">
                         <div onClick={() => getPreviousDate(day, month)} className="flex w-9 h-9 justify-center items-center text-white bg-green-blue rounded-full cursor-pointer">
@@ -114,7 +114,7 @@ export default function Diary(){
                     )}
                 </div>
 
-                <Navigate back="Hábitos" linkBack="habits" next="Contatos de ajuda" linkNext="contacts" />
+                <Navigate active="diary" />
             </div>
         </div>
     )

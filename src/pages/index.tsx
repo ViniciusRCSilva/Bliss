@@ -92,7 +92,7 @@ export default function Home() {
     <div className="animate-screenOpacity">
       <Topbar />
 
-      <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-5 bg-white">
+      <div className="flex flex-col lg:flex-row w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
         <GreenBg>
           <div className="flex flex-col w-[80%] justify-center items-center gap-3">
             <p className="font-medium text-xl lg:text-4xl">Frase do dia</p>
@@ -135,7 +135,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Navigate back="Sair" linkBack="login" next="Hábitos" linkNext="habits" />
+          <Navigate active='house' />
         </div>
 
       </div>

@@ -46,7 +46,7 @@ export default function HabitList(){
                     </div>
                 </div>
 
-                <Navigate back="Voltar" linkBack="habits" visible="hidden" />
+                <Navigate active="habits" />
             </div>
         </div>
     )

@@ -42,7 +42,7 @@ export default function HabitList(){
                     </div>
                 </div>
 
-                <Navigate back="Cancelar" linkBack="habits" visible="hidden" />
+                <Navigate active="habits" />
             </div>
         </div>
     )

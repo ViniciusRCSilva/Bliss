@@ -25,7 +25,7 @@ export default function Account() {
 
   return (
     <div className="animate-screenOpacity">
-      <Topbar />
+      <Topbar active="account" />
 
       <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-5 bg-white">
         <GreenBg>

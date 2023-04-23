@@ -7,7 +7,7 @@ interface NavigateProps{
 
 export function Navigate({ active }: NavigateProps){
     return(
-        <div className="lg:hidden flex w-full h-16 bg-white items-center justify-center select-none shadow-md rotate-180">
+        <div className="lg:hidden flex w-full h-16 py-10 bg-white items-center justify-center select-none shadow-md rotate-180">
 
           <div className="flex w-[80%] justify-between text-3xl text-green-blue rotate-180">
             {active == 'house' ? (              

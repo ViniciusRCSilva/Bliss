@@ -21,9 +21,18 @@ module.exports = {
         '0%': { opacity: '0' },
         '100%': { opacity: '100' },
       },
+      spin: {
+        from: {
+          transform: 'rotate(0deg)'
+        },
+        to: {
+          transform: 'rotate(360deg)'
+        }
+      }
     },
     animation: {
       screenOpacity: 'screenOpacity 0.5s ease-in-out',
+      spin: 'spin 1s linear infinite',
     }
   },
   plugins: [

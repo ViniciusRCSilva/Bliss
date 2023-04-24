@@ -13,9 +13,9 @@ export default function HabitList(){
 
     return(
         <div className="animate-screenOpacity">
-            <Topbar />
-            <div className="flex flex-col w-full h-screen justify-evenly items-center pt-16 gap-5 bg-white">
-                <div className="flex flex-col w-[90%] lg:w-[80%] gap-5">
+            <Topbar active="habits" />
+            <div className="flex flex-col w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
+                <div className="flex flex-col w-[90%] h-full justify-center lg:w-[80%] gap-5">
                     <div className="flex justify-between items-center">
                         <p className="text-xl">{dayName}</p>
 

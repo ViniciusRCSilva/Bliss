@@ -12,7 +12,7 @@ export function Navigate({ active }: NavigateProps){
           <div className="flex w-[80%] justify-between text-3xl text-green-blue rotate-180">
             {active == 'house' ? (              
               <Link href='/' className='flex lg:hidden items-center opacity-100'>
-                <House />
+                <House weight="fill" />
               </Link>
             ): (
               <Link href='/' className='flex lg:hidden items-center opacity-50'>
@@ -22,7 +22,7 @@ export function Navigate({ active }: NavigateProps){
 
             {active == 'habits' ? (              
               <Link href='/habits' className='flex lg:hidden items-center opacity-100'>
-                <ArrowsClockwise />
+                <ArrowsClockwise weight="fill" />
               </Link>
             ): (
               <Link href='/habits' className='flex lg:hidden items-center opacity-50'>
@@ -32,7 +32,7 @@ export function Navigate({ active }: NavigateProps){
 
             {active == 'diary' ? (              
               <Link href='/diary' className='flex lg:hidden items-center opacity-100'>
-                <BookBookmark />
+                <BookBookmark weight="fill" />
               </Link>
             ): (
               <Link href='/diary' className='flex lg:hidden items-center opacity-50'>
@@ -42,7 +42,7 @@ export function Navigate({ active }: NavigateProps){
 
             {active == 'contacts' ? (              
               <Link href='/contacts' className='flex lg:hidden items-center opacity-100'>
-                <Phone />
+                <Phone weight="fill" />
               </Link>
             ): (
               <Link href='/contacts' className='flex lg:hidden items-center opacity-50'>

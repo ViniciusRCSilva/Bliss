@@ -10,7 +10,7 @@ import { ContactBox } from "@/components/ContactBox";
 export default function Contacts() {
   return (
     <div className="animate-screenOpacity">
-      <Topbar />
+      <Topbar active="contacts" />
 
       <div className="flex flex-col lg:flex-row w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
         <GreenBg>

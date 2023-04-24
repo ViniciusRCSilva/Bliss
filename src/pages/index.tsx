@@ -90,7 +90,7 @@ export default function Home() {
 
   return (
     <div className="animate-screenOpacity">
-      <Topbar />
+      <Topbar active="house" />
 
       <div className="flex flex-col lg:flex-row w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
         <GreenBg>

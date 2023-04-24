@@ -1,7 +1,7 @@
 import { GreenBg } from "@/components/GreenBg";
 import { LinkUser } from "@/components/LinksUser";
 import { Topbar } from "@/components/Topbar";
-import { ArrowsCounterClockwise, Baby, BookBookmark, Check, EnvelopeSimple, House, Password, PencilSimple, Phone, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
+import { ArrowsCounterClockwise, Baby, BookBookmark, Check, EnvelopeSimple, House, Password, PencilSimple, Phone, Power, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
 import Image from "next/image";
 
 import Dialog from '@mui/material/Dialog';
@@ -11,6 +11,7 @@ import Img from '../../public/usuário.svg'
 import { useState } from "react";
 import Input from "@/components/Input";
 import { BrazilStates } from "@/components/BrazilStates";
+import Router from "next/router";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
@@ -85,8 +86,23 @@ export default function Account() {
                 </Dialog>
 
                 <div className="flex w-full justify-center items-center gap-5">
-                    <Image src={Img} alt="Imagem frase do dia" width={200} className="hidden lg:flex" />
-                    <Image src={Img} alt="Imagem frase do dia" width={120} className="flex lg:hidden" />
+                    <div className="hidden lg:flex flex-col items-center gap-2 pt-5">
+                      <Image src={Img} alt="Imagem frase do dia" width={200} />
+
+                      <div onClick={() => Router.push('/login')} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
+                        <p>Sair</p>
+                        <Power/>
+                      </div>
+                    </div>
+
+                    <div className="flex lg:hidden flex-col items-center gap-2 pt-5">
+                      <Image src={Img} alt="Imagem frase do dia" width={120} />
+
+                      <div onClick={() => Router.push('/login')} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
+                        <p>Sair</p>
+                        <Power/>
+                      </div>
+                    </div>
                     <div className="flex flex-col gap-2">                
                         <p className="text-2xl lg:text-5xl">Olá, <br/>Usuário!</p>
                         <div className="flex items-center font-light gap-2">
@@ -96,13 +112,14 @@ export default function Account() {
                         <p className="text-sm lg:text-xl font-light">Hábitos completos hoje: 3/7</p>
                     </div>
                 </div>
+                
             </div>
         </GreenBg>
 
         <div className="flex flex-col w-full lg:w-[50%] lg:h-full justify-evenly items-center">
-          <div className="flex w-full h-[35.5vh] lg:h-[90%] lg:items-center justify-center">
+          <div className="flex w-full lg:h-[90%] lg:items-center justify-center">
             <div className="flex flex-col w-[80%] items-center gap-5">
-              <p className="text-xl lg:text-2xl">Navegue pelas outras páginas:</p>
+              <p className="text-xl text-center lg:text-2xl">Navegue pelas outras páginas:</p>
 
                 <div className="flex flex-col items-start gap-3">
                     <LinkUser link="" icon={<House />} linkName="Início" />

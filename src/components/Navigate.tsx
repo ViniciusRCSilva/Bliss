@@ -36,8 +36,8 @@ export function Navigate({ active }: NavigateProps){
         </div>
       </div>
 
-      <div onAnimationEnd={handleHideNavigation} className={`${visibleNavigation} w-full h-16 bottom-0 bg-white shadow-md animate-screenOpacity`}>
-        <div className="lg:hidden flex w-full h-full bg-white items-center justify-center select-none shadow-md rotate-180">
+      <div onAnimationEnd={handleHideNavigation} className={`lg:hidden ${visibleNavigation} w-full h-16 bottom-0 bg-white shadow-md animate-screenOpacity`}>
+        <div className="flex w-full h-full bg-white items-center justify-center select-none shadow-md rotate-180">
 
           <div className="flex w-[80%] justify-between text-3xl text-green-blue rotate-180">
             {active == 'house' ? (              

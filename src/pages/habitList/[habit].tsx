@@ -45,9 +45,8 @@ export default function HabitList(){
                         <Task hour="23:00" taskName="Teste" />
                     </div>
                 </div>
-
-                <Navigate active="habits" />
             </div>
+            <Navigate active="habits" />
         </div>
     )
 }

@@ -113,9 +113,8 @@ export default function Diary(){
                         </div>
                     )}
                 </div>
-
-                <Navigate active="diary" />
             </div>
+            <Navigate active="diary" />
         </div>
     )
 }

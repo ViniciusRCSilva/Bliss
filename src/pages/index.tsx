@@ -83,28 +83,22 @@ export default function Home() {
     handleChangePhrase()
   }, [])
 
-  function getFormat(n: number){
-    let number = ("0" + n).slice(-2)
-    return number
-  }
-
   return (
     <div className="animate-screenOpacity">
       <Topbar active="house" />
 
       <div className="flex flex-col lg:flex-row w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
         <GreenBg>
-          <div className="flex flex-col w-[80%] justify-center items-center gap-3">
+          <div className="flex flex-col w-[80%] justify-center items-center gap-3 py-4">
             <p className="font-medium text-xl lg:text-4xl">Frase do dia</p>
-            <p className="text-center text-sm lg:text-2xl lg:font-light">{getFormat(date.getDate())}/{getFormat(date.getMonth()+1)}/{date.getFullYear()}</p>
             <Image src={Img} alt="Imagem frase do dia" width={300} className="hidden lg:flex" />
-            <Image src={Img} alt="Imagem frase do dia" width={180} className="flex lg:hidden" />
+            <Image src={Img} alt="Imagem frase do dia" width={160} className="flex lg:hidden" />
             <p className="text-center text-sm lg:text-2xl lg:font-light">"{todayPhrase}"</p>
           </div>
         </GreenBg>
 
         <div className="flex flex-col w-full lg:w-[50%] lg:h-full justify-evenly items-center">
-          <div className="flex w-full h-[35.5vh] lg:h-[90%] lg:items-center justify-center">
+          <div className="flex w-full h-[45.5vh] lg:h-[90%] lg:items-center justify-center">
             <div className="flex flex-col w-[80%] items-center gap-5">
               <p className="text-xl">Como está se sentindo hoje?</p>
 
@@ -135,10 +129,9 @@ export default function Home() {
             </div>
           </div>
 
-          <Navigate active='house' />
         </div>
-
       </div>
+      <Navigate active='house' />
     </div>
   )
 }

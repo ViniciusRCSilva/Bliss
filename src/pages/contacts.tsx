@@ -12,7 +12,7 @@ export default function Contacts() {
     <div className="animate-screenOpacity">
       <Topbar active="contacts" />
 
-      <div className="flex flex-col lg:flex-row w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
+      <div className="flex flex-col lg:flex-row w-full h-screen justify-between items-center pt-16 mb-16 md:mb-0 lg:mb-0 gap-5 bg-white">
         <GreenBg>
             <div className="flex flex-col w-[90%] justify-center items-center gap-5">
                 <p className="font-medium text-xl lg:text-4xl">Contatos de ajuda</p>
@@ -37,7 +37,6 @@ export default function Contacts() {
                   <BrazilStates/>
                 </div>
 
-                <p>Principais contatos:</p>
                 <div className="flex flex-col w-full h-[20vh] lg:h-[30vh] p-2 overflow-y-auto items-center justify-start gap-6 scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity">
                   <ContactBox/>
                   <ContactBox/>
@@ -49,11 +48,9 @@ export default function Contacts() {
                 </div>
             </div>
           </div>
-
-          <Navigate active="contacts" />
         </div>
-
       </div>
+      <Navigate active="contacts" />
     </div>
   )
 }

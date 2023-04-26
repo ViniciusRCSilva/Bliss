@@ -9,40 +9,42 @@ import LateralImage from '../../public/imagem_lateral_cadastro.svg'
 
 export default function Register() {
     return (
-        <div className="flex flex-col lg:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none md:justify-center justify-start pt-[4vh] md:pt-0 items-center h-screen text-gray animate-screenOpacity">
-            <div className="lg:flex flex-col hidden text-white bg-green-blue w-[60%] h-full items-center justify-center gap-4 px-5">
-                <Image src={LateralImage} alt="Image lateral" width={500}/>
-                <p className="text-3xl font-medium">Novo por aqui?</p>
-                <p className="text-xl font-light text-center">Crie uma conta no Bliss para desbloquear uma experiência personalizada de bem-estar, projetada para ajudá-lo a alcançar seus objetivos de saúde mental e física.</p>
-            </div>
-            
-            <div className="flex flex-col justify-center items-center w-[80%] md:w-[40%] gap-10">
-                <div>
-                    <Image src={Logo} alt="Logotipo do Bliss" width={190} />
+        <div className="fixed w-full h-[110vh] lg:h-screen">
+            <div className="flex flex-col lg:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none md:justify-center justify-start pt-[4vh] md:pt-0 items-center w-full h-full text-gray animate-screenOpacity">
+                <div className="lg:flex flex-col hidden text-white bg-green-blue w-[60%] h-full items-center justify-center gap-4 px-5">
+                    <Image src={LateralImage} alt="Image lateral" width={500}/>
+                    <p className="text-3xl font-medium">Novo por aqui?</p>
+                    <p className="text-xl font-light text-center">Crie uma conta no Bliss para desbloquear uma experiência personalizada de bem-estar, projetada para ajudá-lo a alcançar seus objetivos de saúde mental e física.</p>
                 </div>
-
-                <form className="flex flex-col justify-center items-center gap-5">
-                    <p className="font-light text-xl">CADASTRO</p>
-
-                    <div className="flex flex-col gap-5">
-                        <Input icon={<SmileyWink/>} type="text" placeholder="Nome" />
-
-                        <Input icon={<EnvelopeSimple/>} type="email" placeholder="Email" />
-                        
-                        <div className="flex flex-col">
-                            <p>Data de nascimento</p>
-                            <Input icon={<Baby/>} type="date" />
-                        </div>
-
-                        <Input icon={<Password/>} type="password" placeholder="Senha" />
+                
+                <div className="flex flex-col justify-center items-center w-[80%] md:w-[40%] gap-10">
+                    <div>
+                        <Image src={Logo} alt="Logotipo do Bliss" width={190} />
                     </div>
 
-                    <Link href='/login'>
-                        <p className="font-light text-sm underline">Já tenho uma conta!</p>
-                    </Link>
+                    <form className="flex flex-col justify-center items-center gap-5">
+                        <p className="font-light text-xl">CADASTRO</p>
 
-                    <div onClick={() => Router.push('/additionalInfo')} className="bg-green-blue rounded-lg px-4 py-2 text-xl text-white shadow-md lg:cursor-pointer">CADASTRAR</div>
-                </form>
+                        <div className="flex flex-col gap-5">
+                            <Input icon={<SmileyWink/>} type="text" placeholder="Nome" />
+
+                            <Input icon={<EnvelopeSimple/>} type="email" placeholder="Email" />
+                            
+                            <div className="flex flex-col">
+                                <p>Data de nascimento</p>
+                                <Input icon={<Baby/>} type="date" />
+                            </div>
+
+                            <Input icon={<Password/>} type="password" placeholder="Senha" />
+                        </div>
+
+                        <Link href='/login'>
+                            <p className="font-light text-sm underline">Já tenho uma conta!</p>
+                        </Link>
+
+                        <div onClick={() => Router.push('/additionalInfo')} className="bg-green-blue rounded-lg px-4 py-2 text-xl text-white shadow-md lg:cursor-pointer lg:transition-shadow lg:shadow-transparent lg:hover:shadow-md">CADASTRAR</div>
+                    </form>
+                </div>
             </div>
         </div>
     )

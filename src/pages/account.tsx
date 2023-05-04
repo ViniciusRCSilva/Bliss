@@ -18,7 +18,7 @@ import InputRead from "@/components/InputRead";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
-  const { user, setUser, updateUser, logout } = UseAuth()
+  const { user, setUser, updateUser, logout, getUser } = UseAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [birthdate, setBirthdate] = useState('')
@@ -52,7 +52,7 @@ export default function Account() {
     setEmail(user.email)
     setBirthdate(user.birthdate!)
 
-    console.log(user.birthdate)
+    console.log(user)
 	}, [user])
 
   return (

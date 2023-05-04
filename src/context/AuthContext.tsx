@@ -135,6 +135,8 @@ export function AuthProvider(props: any) {
         setLoading(true)
 
         await authentication.logout()
+        
+		setUser(new User({name: '', email: ''}))
 
         setLoading(false)
     }

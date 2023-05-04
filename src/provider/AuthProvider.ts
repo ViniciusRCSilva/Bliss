@@ -79,6 +79,8 @@ export class AuthenticationProvider implements ProviderUserProps {
 						resolve(new User({
 							name: doc.data().name,
 							email: doc.data().email,
+							birthdate: doc.data().birthdate,
+							state: doc.data().state ?? '',
 						}))
 					})
 				})

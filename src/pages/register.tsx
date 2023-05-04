@@ -36,7 +36,7 @@ export default function Register() {
     async function handleCreateSubmit(e: FormEvent) {
         e.preventDefault()
 
-        if (name !== '' && birthdate !== undefined) {
+        if (name !== '' && birthdate !== '') {
             if (visible && password !== '') {
                 if (password.length >= 6) {
                     await createUserPassword(name, state, email, password, birthdate)

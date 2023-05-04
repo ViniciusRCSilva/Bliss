@@ -8,7 +8,7 @@ import LateralImage from '../../public/imagem_lateral_esqueceuSenha.svg'
 import UseAuth from "@/hook/useAuth";
 import { useState } from "react";
 
-export default function forgotPassword(){
+export default function ForgotPassword(){
     const [email, setEmail] = useState('')
 
     return(

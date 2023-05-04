@@ -9,16 +9,7 @@ import UseAuth from "@/hook/useAuth";
 import { useState } from "react";
 
 export default function forgotPassword(){
-    const { sendPasswordResetToEmail } = UseAuth()
     const [email, setEmail] = useState('')
-
-    async function handleEmailInput(){
-        if(email !== ''){
-            await sendPasswordResetToEmail(email)
-        }else{
-            alert('Email não encontrado')
-        }
-    }
 
     return(
         <div className="flex flex-col lg:flex-row bg-[url('../../public/bottom_bliss.svg')] bg-no-repeat bg-bottom bg-contain sm:bg-none md:justify-center justify-start pt-[4vh] md:pt-0 items-center w-full h-screen text-gray animate-screenOpacity">
@@ -49,7 +40,7 @@ export default function forgotPassword(){
                         <p className="font-light text-sm underline">Voltar</p>
                     </Link>
 
-                    <button onClick={handleEmailInput} className="bg-green-blue rounded-lg px-4 py-2 text-xl text-white shadow-md">ENVIAR</button>
+                    <button className="bg-green-blue rounded-lg px-4 py-2 text-xl text-white shadow-md">ENVIAR</button>
                 </form>
             </div>
         </div>

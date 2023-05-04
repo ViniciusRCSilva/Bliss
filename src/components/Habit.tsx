@@ -94,7 +94,7 @@ export function Habit(){
                             <p className="text-xl font-medium">{day},</p>
 
                             <p>meu novo hábito das:</p>
-                            <Input type="time" icon={<Clock/>} />
+                            <Input type="time" icon={<Clock/>} value={undefined} valueChange={() => null} />
 
                             <p>vai ser:</p>
 

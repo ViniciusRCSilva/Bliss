@@ -8,13 +8,20 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
 import Img from '../../public/usuário.svg'
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Input from "@/components/Input";
 import { BrazilStates } from "@/components/BrazilStates";
 import Router from "next/router";
+import UseAuth from "@/hook/useAuth";
+import { User } from "@/core/User";
+import InputRead from "@/components/InputRead";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
+  const { user, setUser, updateUser, logout } = UseAuth()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [birthdate, setBirthdate] = useState('')
 
   const handleClickOpen = () => {
       setOpen(true);
@@ -22,7 +29,31 @@ export default function Account() {
   
   const handleClose = () => {
       setOpen(false);
+      setName(user.name)
   };
+
+	async function handleCreateSubmit(e: FormEvent) {
+		e.preventDefault()
+		if (name.length !== 0) {
+			const newUser = new User({
+				email: user.email,
+				name: name ?? user.name,
+				birthdate: birthdate ?? user.birthdate
+			})
+			await updateUser(newUser)
+			setUser(newUser)
+		} else {
+			console.log('erro')
+		}
+	}
+
+	useEffect(() => {
+		setName(user.name)
+    setEmail(user.email)
+    setBirthdate(user.birthdate!)
+
+    console.log(user.birthdate)
+	}, [user])
 
   return (
     <div className="animate-screenOpacity">
@@ -57,15 +88,15 @@ export default function Account() {
                                     <PencilSimple className="text-2xl text-green-blue" />
                                   </div>
 
-                                  <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value="Usuário da Silva" />
+                                  <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value={name} valueChange={setName} />
                                   <BrazilStates/>
                                   <div className="flex flex-col w-full">
                                     <p>Data de nascimento</p>
-                                    <Input icon={<Baby/>} type="date" disabled value="2000-06-02" />
+                                    <InputRead icon={<Baby/>} type="date" disabled value={birthdate} />
                                   </div>
-                                  <Input icon={<EnvelopeSimple/>} type="email" placeholder="Email" value="exemplo@gmail.com" disabled />
+                                  <InputRead icon={<EnvelopeSimple/>} type="email" placeholder="Email" value={email} disabled />
                                   <div className="flex flex-col w-full gap-2">
-                                    <Input icon={<Password/>} type="password" placeholder="Senha" value="senha_forte123" disabled />
+                                    <InputRead icon={<Password/>} type="password" placeholder="Senha" value="modificar_senha" disabled />
                                     <p className="text-green-blue font-light underline cursor-pointer">Solicitar troca de senha</p>
                                     <p className="text-sm text-red-600 font-light">* Após solicitar a troca de senha, será enviado um e-mail contendo um link para redirecionamento à tela de troca de senha.</p>
                                   </div>
@@ -73,7 +104,7 @@ export default function Account() {
                               </div>
 
                               <div className="flex w-full justify-between items-end">
-                                  <button className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                  <button onClick={handleCreateSubmit} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
                                       Salvar
                                       <Check weight="bold" className="text-xl" />
                                   </button>
@@ -89,7 +120,7 @@ export default function Account() {
                     <div className="hidden lg:flex flex-col items-center gap-2 pt-5">
                       <Image src={Img} alt="Imagem frase do dia" width={200} />
 
-                      <div onClick={() => Router.push('/login')} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
+                      <div onClick={logout} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
                         <p>Sair</p>
                         <Power/>
                       </div>
@@ -98,13 +129,13 @@ export default function Account() {
                     <div className="flex lg:hidden flex-col items-center gap-2 pt-5">
                       <Image src={Img} alt="Imagem frase do dia" width={120} />
 
-                      <div onClick={() => Router.push('/login')} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
+                      <div onClick={logout} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
                         <p>Sair</p>
                         <Power/>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">                
-                        <p className="text-2xl lg:text-5xl">Olá, <br/>Usuário!</p>
+                        <p className="text-2xl lg:text-5xl">Olá, <br/>{name}!</p>
                         <div className="flex items-center font-light gap-2">
                             <p className="text-sm lg:text-xl">Como eu me sinto hoje?</p>
                             <Smiley className="text-2xl lg:text-3xl" weight="fill" />

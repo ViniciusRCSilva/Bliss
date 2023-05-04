@@ -1,3 +1,5 @@
+import { Loading } from '@/components/Loading'
+import { AuthProvider } from '@/context/AuthContext'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Lexend } from 'next/font/google'
@@ -12,10 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Bliss - Bem-estar</title>
       </Head>
 
-      <div className={lexend.className}>
-        <Component {...pageProps} />
-      </div>
-
+      <AuthProvider>
+        <Loading>
+          <div className={lexend.className}>
+            <Component {...pageProps} />
+          </div>
+        </Loading>
+      </AuthProvider>
     </>
   )
 }

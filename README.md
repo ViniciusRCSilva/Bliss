@@ -15,6 +15,7 @@ Para desenvolver a aplicação Bliss, foram utilizadas as seguintes ferramentas:
 - <img align="center" alt="TCSS" height="30" width="30" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"> **TailwindCSS**: uma biblioteca de classes CSS pré-definidas que permite o desenvolvimento rápido e fácil de interfaces de usuário responsivas.
 - <img align="center" alt="MUI" height="30" width="30" src="https://mui.com/static/logo.png"> **Material UI (MUI)**: uma biblioteca de componentes React pré-definidos e estilizados para ajudar no desenvolvimento de interfaces de usuário elegantes e funcionais.
 - <img align="center" alt="PHICON" height="30" width="30" src="https://raw.githubusercontent.com/phosphor-icons/phosphor-icons/HEAD/meta/phosphor-mark-tight-yellow.png">  **Phosphor Icons**: uma biblioteca de ícones vetoriais que podem ser facilmente integrados em qualquer aplicação web.
+- <img align="center" alt="FB" width="30" src="https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png?hl=pt-br"> **Firebase**: é uma plataforma de desenvolvimento de aplicativos móveis e web com diversas ferramentas e serviços em nuvem para ajudar os desenvolvedores a criar, executar e escalar aplicativos de alta qualidade.
 
 ## Protótipo
 

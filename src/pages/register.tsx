@@ -9,6 +9,7 @@ import LateralImage from '../../public/imagem_lateral_cadastro.svg'
 import { FormEvent, useEffect, useState } from "react";
 import UseAuth from "@/hook/useAuth";
 import { User } from "@/core/User";
+import { date_TO_String } from "@/utils";
 
 export default function Register() {
     const date = new Date
@@ -20,18 +21,6 @@ export default function Register() {
     const [password, setPassword] = useState('')
     const [visible, setVisible] = useState(true)
     const { createUserPassword, user, submitUser } = UseAuth()
-
-    function getFormat(n: number){
-        let number = ("0" + n).slice(-2)
-        return number
-    }
-
-    function date_TO_String(date_Object: Date){
-        var date_String = 
-        date_Object.getFullYear() + "-" + getFormat((date_Object.getMonth() + 1)) + "-" + getFormat(date_Object.getDate())
-            
-        return date_String;
-    }
 
     async function handleCreateSubmit(e: FormEvent) {
         e.preventDefault()

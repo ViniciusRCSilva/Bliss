@@ -6,16 +6,19 @@ import Cookie from 'js-cookie'
 import { User } from "../core/User"
 import { AuthenticationProvider } from "../provider/AuthProvider"
 import { ProviderUser } from "../core/ProviderUser"
+import { Diary } from "@/core/Diary"
 
 interface AuthContextProps {
     loginGoogle: () => Promise<void>
     loginPassword(email: string, password: string): Promise<void>
     createUserPassword(name: string, state: string, email: string, password: string, birthdate: string): Promise<void>
+    createTextDiary(text: string, user: User): Promise<Diary | void>
     updateUser(user: User): Promise<void>
     logout(): Promise<void>
     getUser(user: User): Promise<User | false>
     submitUser(user: User): Promise<void>
     user: User
+    diary: Diary
     setUser: (value: any) => void
     loading: boolean
     setLoading: any
@@ -25,6 +28,7 @@ const AuthContext = createContext<AuthContextProps>({
     loginGoogle: () => Promise.resolve(),
     loginPassword: () => Promise.resolve(),
     createUserPassword: () => Promise.resolve(),
+    createTextDiary: () => Promise.resolve(),
     updateUser: () => Promise.resolve(),
     logout: () => Promise.resolve(),
     getUser: (user: User) => Promise.resolve(user),
@@ -32,6 +36,10 @@ const AuthContext = createContext<AuthContextProps>({
     user: new User({
         email: '',
         name: ''
+    }),
+    diary: new Diary({
+        text: '',
+        createdAt: ''
     }),
     setUser: () => { },
     loading: false,
@@ -41,26 +49,27 @@ const AuthContext = createContext<AuthContextProps>({
 export function AuthProvider(props: any) {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState<User>(new User({ email: '', name: '' }))
+    const [diary, setDiary] = useState<Diary>(new Diary({ text: '', createdAt: '' }))
     const authentication = new ProviderUser(new AuthenticationProvider())
     const userCookie = Cookie.get('Admin-Bliss')
 
-	async function loginGoogle() {
-		setLoading(true)
-		const loggedUser = await authentication.loginGoogle()
-		const searchedUser = await getUser(loggedUser)
+    async function loginGoogle() {
+        setLoading(true)
+        const loggedUser = await authentication.loginGoogle()
+        const searchedUser = await getUser(loggedUser)
 
-		if (searchedUser) {
-			AuthenticationProvider.setCookieUser(searchedUser)
-			setLoading(false)
-			Router.push('/')
-		} else {
+        if (searchedUser) {
+            AuthenticationProvider.setCookieUser(searchedUser)
+            setLoading(false)
+            Router.push('/')
+        } else {
             submitUser(loggedUser)
             setUser(loggedUser)
-			AuthenticationProvider.setCookieUser(loggedUser)
-			setLoading(false)
-			Router.push('/register')
-		}
-	}
+            AuthenticationProvider.setCookieUser(loggedUser)
+            setLoading(false)
+            Router.push('/register')
+        }
+    }
 
     async function loginPassword(email: string, password: string) {
         setLoading(true)
@@ -105,6 +114,14 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
+    async function createTextDiary(text: string, user: User) {
+        setLoading(true)
+
+        await authentication.createTextDiary(text, user)
+
+        setLoading(false)
+    }
+
     async function getUser(user: User) {
         setLoading(true)
 
@@ -135,8 +152,8 @@ export function AuthProvider(props: any) {
         setLoading(true)
 
         await authentication.logout()
-        
-		setUser(new User({name: '', email: ''}))
+
+        setUser(new User({ name: '', email: '' }))
 
         setLoading(false)
     }
@@ -159,11 +176,13 @@ export function AuthProvider(props: any) {
         loginGoogle,
         loginPassword,
         createUserPassword,
+        createTextDiary,
         updateUser,
         logout,
         getUser,
         submitUser,
         user,
+        diary,
         setUser,
         loading,
         setLoading

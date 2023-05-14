@@ -1,3 +1,5 @@
+import { DiaryProps } from "./Diary"
+
 const date = new Date()
 
 export interface UserProps {
@@ -5,6 +7,7 @@ export interface UserProps {
 	email: string
     birthdate?: string
 	state?: string
+	diary?: DiaryProps[]
 }
 
 export class User {
@@ -16,6 +19,7 @@ export class User {
 	get email() { return this._props.email }
 	get birthdate() { return this._props.birthdate }
 	get state() { return this._props.state }
+	get diary() { return this._props.diary }
 
 	clone(props: UserProps) {
 		return new User({

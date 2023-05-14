@@ -4,6 +4,7 @@ export interface ProviderUserProps {
 	loginGoogle(): Promise<User>
 	loginPassword(email: string, password: string): Promise<User>
 	createUserPassword(email: string, password: string): Promise<void>
+	createTextDiary(text: string, user: User): Promise<void>
 	updateUser(user: User): Promise<void>
 	getUser(user: User): Promise<User | false>
 	getUserLogged(cookie: string): Promise<User>
@@ -30,6 +31,10 @@ export class ProviderUser {
 
 	async createUserPassword(email: string, password: string): Promise<void> {
 		await this._providerAuthentication.createUserPassword(email, password)
+	}
+
+	async createTextDiary(text: string, user: User): Promise<void> {
+		await this._providerAuthentication.createTextDiary(text, user)
 	}
 
 	async getUser(user: User): Promise<User | false> {

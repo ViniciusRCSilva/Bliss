@@ -6,6 +6,7 @@ import Cookie from 'js-cookie'
 import { auth, db } from '../firebase/config'
 import { ProviderUserProps } from '../core/ProviderUser'
 import { User } from '../core/User'
+import { date_TO_String } from '@/utils'
 
 export class AuthenticationProvider implements ProviderUserProps {
 
@@ -37,6 +38,20 @@ export class AuthenticationProvider implements ProviderUserProps {
 		createUserWithEmailAndPassword(auth, email, password)
 	}
 
+	async createTextDiary(text: string, user: User): Promise<void> {
+		const userRef = doc(db, "users", user.email)
+		const diaryUser = user.diary
+
+		diaryUser?.push({
+			text,
+			createdAt: date_TO_String(new Date())
+		})
+
+		await updateDoc(userRef, {
+			diary: diaryUser
+		})
+	}
+
 	async updateUser(user: User): Promise<void> {
 		const userRef = doc(db, "users", user.email);
 
@@ -59,6 +74,7 @@ export class AuthenticationProvider implements ProviderUserProps {
 			email: user.email,
 			state: user.state ?? '',
 			birthdate: user.birthdate ?? '',
+			
 		})
 	}
 
@@ -81,6 +97,7 @@ export class AuthenticationProvider implements ProviderUserProps {
 							email: doc.data().email,
 							birthdate: doc.data().birthdate,
 							state: doc.data().state ?? '',
+							diary: doc.data().diary ?? []
 						}))
 					})
 				})

@@ -11,10 +11,13 @@ export function TextsDiary() {
                     <p className="font-light text-center">Você ainda não tem anotações!</p>
                 ) : (
                     <>
-                        {user.diary?.map((diary) => {
+                        {user.diary?.map((diary, i) => {
                             return(
-                                <div className="flex w-full items-center justify-between p-2 px-4 border-2 border-green-blue rounded-lg animate-screenOpacity shadow-md">
-                                    <div className="flex flex-col" key={diary.createdAt}>
+                                <div 
+                                    className="flex w-full items-center justify-between p-2 px-4 border-2 border-green-blue rounded-lg animate-screenOpacity shadow-md"
+                                    key={i}
+                                >
+                                    <div className="flex flex-col">
                                         <p className="font-medium text-lg">{diary.createdAt}</p>
                                         <p className="text-sm font-light w-40 lg:w-80 whitespace-nowrap text-ellipsis overflow-hidden">{diary.text}</p>
                                     </div>

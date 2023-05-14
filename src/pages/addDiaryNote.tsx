@@ -6,7 +6,7 @@ import { Plus } from "@phosphor-icons/react";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
-export default function addDiaryNote(){
+export default function AddDiaryNote(){
     const date = new Date()
     const [day, setDay] = useState<string>(getFormat(date.getDate()))
     const [month, setMonth] = useState<string>(getFormat(date.getMonth()+1))

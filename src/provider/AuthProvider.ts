@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
-import { collection, doc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore'
+import { collection, deleteField, doc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore'
 import Router from 'next/router'
 import Cookie from 'js-cookie'
 
@@ -49,6 +49,15 @@ export class AuthenticationProvider implements ProviderUserProps {
 
 		await updateDoc(userRef, {
 			diary: diaryUser
+		})
+	}
+
+	async deleteTextDiary(user: User): Promise<void> {
+		const userRef = doc(db, "users", user.email)
+		/* const diaryUser = user.diary */
+
+		await updateDoc(userRef, {
+			diary: deleteField()
 		})
 	}
 

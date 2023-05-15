@@ -13,6 +13,7 @@ interface AuthContextProps {
     loginPassword(email: string, password: string): Promise<void>
     createUserPassword(name: string, state: string, email: string, password: string, birthdate: string): Promise<void>
     createTextDiary(text: string, user: User): Promise<Diary | void>
+    deleteTextDiary(user: User): Promise<void>
     updateUser(user: User): Promise<void>
     logout(): Promise<void>
     getUser(user: User): Promise<User | false>
@@ -29,6 +30,7 @@ const AuthContext = createContext<AuthContextProps>({
     loginPassword: () => Promise.resolve(),
     createUserPassword: () => Promise.resolve(),
     createTextDiary: () => Promise.resolve(),
+    deleteTextDiary: () => Promise.resolve(),
     updateUser: () => Promise.resolve(),
     logout: () => Promise.resolve(),
     getUser: (user: User) => Promise.resolve(user),
@@ -122,6 +124,14 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
+    async function deleteTextDiary(user: User) {
+        setLoading(true)
+
+        await authentication.deleteTextDiary(user)
+
+        setLoading(false)
+    }
+
     async function getUser(user: User) {
         setLoading(true)
 
@@ -177,6 +187,7 @@ export function AuthProvider(props: any) {
         loginPassword,
         createUserPassword,
         createTextDiary,
+        deleteTextDiary,
         updateUser,
         logout,
         getUser,

@@ -12,7 +12,7 @@ export default function Diary(){
         <div className="animate-screenOpacity">
             <Topbar active="diary" />
             <div className="flex flex-col w-full h-screen justify-between items-center pt-24 gap-5 bg-white">
-                <div className="flex flex-col w-[80%] h-[80%] gap-10">
+                <div className="flex flex-col w-[90%] lg:w-[80%] h-[80%] gap-10">
                     <div className="text-xl flex gap-1.5">
                         <p>Diário de</p>
                         <p className="text-green-blue">{user.name}</p>

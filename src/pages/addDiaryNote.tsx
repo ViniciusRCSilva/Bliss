@@ -65,10 +65,11 @@ export default function AddDiaryNote(){
                                 <div className="flex flex-col w-full gap-4">
                                     <p className="text-xl font-medium">Conte como foi seu dia:</p>
 
-                                    <textarea onChange={(e) => setText(e.target.value)} required className="w-full h-96 bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg resize-none" />
+                                    <textarea onChange={(e) => setText(e.target.value)} required maxLength={1000} className="w-full h-96 bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg resize-none" />
+                                    <p className="text-gray font-light">Limite de caracteres: {1000 - text.length}</p>
                                 </div>
 
-                                <div className="flex w-full justify-between items-end">
+                                <div className="flex w-full justify-between items-end mb-20">
                                     <button onClick={handleSubmitText} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
                                         Adicionar
                                         <Plus weight="bold" className="text-xl" />

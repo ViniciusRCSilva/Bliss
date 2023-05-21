@@ -13,8 +13,8 @@ export function TextBox(props: textBoxProps){
     const [isOpen, setIsOpen] = useState(false)
     const [deleteConfirm, setDeleteConfirm] = useState(false)
 
-    async function handleDeleteText(){
-        await deleteTextDiary(user)
+    async function handleDeleteText(date: string){
+        await deleteTextDiary(date ,user)
         Router.reload()
     }
 
@@ -45,7 +45,7 @@ export function TextBox(props: textBoxProps){
                                     <div className="flex items-center lg:w-[30%] justify-between animate-screenOpacity">
                                         <div 
                                             className="flex items-center cursor-pointer text-red-500 underline transition-colors rounded-lg gap-2"
-                                            onClick={handleDeleteText}
+                                            onClick={() => handleDeleteText(props.createdAt)}
                                         >
                                             <TrashSimple weight="bold" />
                                             <p>Confirmar exclusão</p>

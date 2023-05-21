@@ -19,13 +19,13 @@ export default function Diary(){
                     </div>
 
                     <div className="flex flex-col w-full gap-5">      
-                        <div className="select-none">
+                        <div className="flex flex-col justify-center items-center select-none gap-10">
                             <div className="flex items-center justify-center gap-2">
                                 <p className="lg:text-lg font-light">Clique e escreva como foi seu dia</p>
                                 <SmileyWink className="text-3xl text-green-blue" />
                             </div>
 
-                            <Link href='/addDiaryNote' className="flex justify-center mt-10">
+                            <Link href='/addDiaryNote' className="flex justify-center">
                                 <PlusCircle weight="fill" className="text-green-blue text-5xl lg:hover:scale-110 lg:hover:rotate-180 lg:transition-all cursor-pointer" />
                             </Link>
                         </div>

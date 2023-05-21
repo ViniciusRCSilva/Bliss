@@ -7,19 +7,22 @@ import { User } from "../core/User"
 import { AuthenticationProvider } from "../provider/AuthProvider"
 import { ProviderUser } from "../core/ProviderUser"
 import { Diary } from "@/core/Diary"
+import { Emotion } from "@/core/Emotion"
 
 interface AuthContextProps {
     loginGoogle: () => Promise<void>
     loginPassword(email: string, password: string): Promise<void>
     createUserPassword(name: string, state: string, email: string, password: string, birthdate: string): Promise<void>
     createTextDiary(text: string, user: User): Promise<Diary | void>
-    deleteTextDiary(user: User): Promise<void>
+    deleteTextDiary(date: string, user: User): Promise<void>
     updateUser(user: User): Promise<void>
     logout(): Promise<void>
     getUser(user: User): Promise<User | false>
     submitUser(user: User): Promise<void>
+    emotionUser(emotion: string, user: User): Promise<Emotion | void>
     user: User
     diary: Diary
+    emotion: Emotion
     setUser: (value: any) => void
     loading: boolean
     setLoading: any
@@ -35,6 +38,7 @@ const AuthContext = createContext<AuthContextProps>({
     logout: () => Promise.resolve(),
     getUser: (user: User) => Promise.resolve(user),
     submitUser: () => Promise.resolve(),
+    emotionUser: () => Promise.resolve(),
     user: new User({
         email: '',
         name: ''
@@ -42,6 +46,10 @@ const AuthContext = createContext<AuthContextProps>({
     diary: new Diary({
         text: '',
         createdAt: ''
+    }),
+    emotion: new Emotion({
+        emotion: '',
+        date: ''
     }),
     setUser: () => { },
     loading: false,
@@ -52,6 +60,7 @@ export function AuthProvider(props: any) {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState<User>(new User({ email: '', name: '' }))
     const [diary, setDiary] = useState<Diary>(new Diary({ text: '', createdAt: '' }))
+    const [emotion, setEmotion] = useState<Emotion>(new Emotion({ emotion: '', date: '' }))
     const authentication = new ProviderUser(new AuthenticationProvider())
     const userCookie = Cookie.get('Admin-Bliss')
 
@@ -124,10 +133,10 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
-    async function deleteTextDiary(user: User) {
+    async function deleteTextDiary(date: string, user: User) {
         setLoading(true)
 
-        await authentication.deleteTextDiary(user)
+        await authentication.deleteTextDiary(date ,user)
 
         setLoading(false)
     }
@@ -156,6 +165,10 @@ export function AuthProvider(props: any) {
         await authentication.submitUser(user)
 
         setLoading(false)
+    }
+
+    async function emotionUser(emotion: string, user: User) {
+        await authentication.emotionUser(emotion, user)
     }
 
     async function logout() {
@@ -192,8 +205,10 @@ export function AuthProvider(props: any) {
         logout,
         getUser,
         submitUser,
+        emotionUser,
         user,
         diary,
+        emotion,
         setUser,
         loading,
         setLoading

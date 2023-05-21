@@ -52,12 +52,14 @@ export class AuthenticationProvider implements ProviderUserProps {
 		})
 	}
 
-	async deleteTextDiary(user: User): Promise<void> {
+	async deleteTextDiary(date: string, user: User): Promise<void> {
 		const userRef = doc(db, "users", user.email)
-		/* const diaryUser = user.diary */
+		const diaryUser = user.diary
+
+		const searchDiary = diaryUser?.filter(d => d.createdAt !== date)
 
 		await updateDoc(userRef, {
-			diary: deleteField()
+			diary: searchDiary ?? []
 		})
 	}
 
@@ -83,7 +85,20 @@ export class AuthenticationProvider implements ProviderUserProps {
 			email: user.email,
 			state: user.state ?? '',
 			birthdate: user.birthdate ?? '',
-			
+		})
+	}
+
+	async emotionUser(emotion: string, user: User): Promise<void> {
+		const userRef = doc(db, "users", user.email)
+		const emotionUser = user.emotion ?? []
+
+		emotionUser.push({
+			emotion,
+			date: date_TO_String(new Date())
+		})
+
+		await updateDoc(userRef, {
+			emotion: emotionUser
 		})
 	}
 
@@ -106,7 +121,8 @@ export class AuthenticationProvider implements ProviderUserProps {
 							email: doc.data().email,
 							birthdate: doc.data().birthdate,
 							state: doc.data().state ?? '',
-							diary: doc.data().diary ?? []
+							diary: doc.data().diary ?? [],
+							emotion: doc.data().emotion ?? []
 						}))
 					})
 				})

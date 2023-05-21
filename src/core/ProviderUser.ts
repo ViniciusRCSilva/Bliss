@@ -5,11 +5,12 @@ export interface ProviderUserProps {
 	loginPassword(email: string, password: string): Promise<User>
 	createUserPassword(email: string, password: string): Promise<void>
 	createTextDiary(text: string, user: User): Promise<void>
-	deleteTextDiary(user: User): Promise<void>
+	deleteTextDiary(date:string, user: User): Promise<void>
 	updateUser(user: User): Promise<void>
 	getUser(user: User): Promise<User | false>
 	getUserLogged(cookie: string): Promise<User>
 	submitUser(user: User): Promise<void>
+	emotionUser(emotion:string, user: User): Promise<void>
 	logout(): Promise<void>
 }
 
@@ -38,8 +39,8 @@ export class ProviderUser {
 		await this._providerAuthentication.createTextDiary(text, user)
 	}
 
-	async deleteTextDiary(user: User): Promise<void> {
-		await this._providerAuthentication.deleteTextDiary(user)
+	async deleteTextDiary(date:string, user: User): Promise<void> {
+		await this._providerAuthentication.deleteTextDiary(date, user)
 	}
 
 	async getUser(user: User): Promise<User | false> {
@@ -50,6 +51,10 @@ export class ProviderUser {
 
 	async submitUser(user: User): Promise<void> {
 		await this._providerAuthentication.submitUser(user)
+	}
+
+	async emotionUser(emotion: string, user: User): Promise<void> {
+		await this._providerAuthentication.emotionUser(emotion, user)
 	}
 
 	async logout(): Promise<void> {

@@ -1,6 +1,5 @@
 import { DiaryProps } from "./Diary"
-
-const date = new Date()
+import { EmotionProps } from "./Emotion"
 
 export interface UserProps {
 	name: string
@@ -8,6 +7,7 @@ export interface UserProps {
     birthdate?: string
 	state?: string
 	diary?: DiaryProps[]
+	emotion?: EmotionProps[]
 }
 
 export class User {
@@ -20,6 +20,7 @@ export class User {
 	get birthdate() { return this._props.birthdate }
 	get state() { return this._props.state }
 	get diary() { return this._props.diary }
+	get emotion() { return this._props.emotion }
 
 	clone(props: UserProps) {
 		return new User({

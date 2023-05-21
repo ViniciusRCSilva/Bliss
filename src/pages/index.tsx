@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import frases  from '@/utils/frases_motivacionais.json'
 
 import Img from '../../public/frase_do_dia.svg'
+import UseAuth from "@/hook/useAuth";
+import { date_TO_String } from "@/utils";
 
 interface VisibleProps {
   id: 'sad' | 'neutral' | 'happy'
@@ -43,12 +45,18 @@ export default function Home() {
     },
   ]
 
+  const { user, emotionUser } = UseAuth()
   const [visible, setVisible] = useState<VisibleProps>()
   const [todayPhrase, setTodayPhrase] = useState('')
+  const [isBlocked, setIsBlocked] = useState(false)
+  const [emotion, setEmotion] = useState('')
   const date = new Date
 
-  function handleOpenMessage(index: number) {
+  const formatDate = date_TO_String(date)
+
+  async function handleUserEmotion(index: number, emotion: string) {
     setVisible({ ...optionList[index], visible: true, color: 'text-green-blue transition-colors', disable: true })
+    await emotionUser(emotion, user)
   }
 
   function handleChangePhrase(){
@@ -79,9 +87,23 @@ export default function Home() {
     }
   }
 
+  function handleBlockUserPost(){
+    user.emotion?.forEach((emotion) => {
+      (emotion.date == formatDate && emotion.emotion.length != 0) && setIsBlocked(true)
+    })
+
+    user.emotion?.forEach((emotion) => {
+      (emotion.date == formatDate && emotion.emotion.length != 0) && setEmotion(emotion.emotion)
+    })
+  }
+
   useEffect(() => {
     handleChangePhrase()
   }, [])
+
+  useEffect(() => {
+    handleBlockUserPost()
+  }, [user])
 
   return (
     <div className="animate-screenOpacity">
@@ -102,22 +124,71 @@ export default function Home() {
             <div className="flex flex-col w-[80%] items-center gap-5">
               <p className="text-xl">Como está se sentindo hoje?</p>
 
-              <div className="flex w-full justify-evenly items-center text-4xl lg:text-5xl">
-                {optionList.map((opt, index) => {
-                  if (opt.id === 'sad') {
-                    return (
-                      <button onClick={() => handleOpenMessage(index)} key={index} disabled={visible?.disable}><SmileySad className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform`} /></button>
-                    )
-                  } else if (opt.id === 'neutral') {
-                    return (
-                      <button onClick={() => handleOpenMessage(index)} key={index} disabled={visible?.disable}><SmileyMeh className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform`} /></button>
-                    )
-                  } else if (opt.id === 'happy') {
-                    return (
-                      <button onClick={() => handleOpenMessage(index)} key={index} disabled={visible?.disable}><Smiley className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform`} /></button>
-                    )
-                  }
-                })}
+              <div className="flex w-full justify-evenly items-center text-2xl">
+                {isBlocked ? (
+                  <>                  
+                  {optionList.map((opt, index) => {
+                    if (opt.id == emotion && emotion == 'sad') {
+                      return (
+                        <div key={index} className="flex flex-col justify-center items-center gap-2">                        
+                          <div className="flex items-center gap-2 animate-screenOpacity">
+                            <SmileySad className="text-green-blue text-4xl lg:text-5xl" />
+                            <p className="font-light">Triste</p>
+                          </div>
+
+                          <div className={`font-light text-base overflow-y-auto h-[30vh] border-2 border-green-blue rounded-lg scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity`}>
+                            <SadAnswer/>
+                          </div>
+                        </div>
+                      )
+                    } else if (opt.id == emotion && emotion == 'neutral') {
+                      return (
+                        <div key={index} className="flex flex-col justify-center items-center gap-2">                        
+                          <div className="flex items-center gap-2 animate-screenOpacity">
+                            <SmileyMeh className="text-green-blue text-4xl lg:text-5xl" />
+                            <p className="font-light">Neutro</p>
+                          </div>
+
+                          <div className={`font-light text-base overflow-y-auto h-[30vh] border-2 border-green-blue rounded-lg scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity`}>
+                            <NeutralAnswer/>
+                          </div>
+                        </div>
+                      )
+                    } else if (opt.id == emotion && emotion == 'happy') {
+                      return (
+                        <div key={index} className="flex flex-col justify-center items-center gap-2">                        
+                          <div className="flex items-center gap-2 animate-screenOpacity">
+                            <Smiley className="text-green-blue text-4xl lg:text-5xl" />
+                            <p className="font-light">Feliz</p>
+                          </div>
+
+                          <div className={`font-light text-base overflow-y-auto h-[30vh] border-2 border-green-blue rounded-lg scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg animate-screenOpacity`}>
+                            <HappyAnswer/>
+                          </div>
+                        </div>
+                      )
+                    }
+                  })}
+                </>
+                ) : (
+                  <>                  
+                    {optionList.map((opt, index) => {
+                      if (opt.id === 'sad') {
+                        return (
+                          <button onClick={() => handleUserEmotion(index, opt.id)} key={index} disabled={visible?.disable}><SmileySad className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform text-4xl lg:text-5xl animate-screenOpacity`} /></button>
+                        )
+                      } else if (opt.id === 'neutral') {
+                        return (
+                          <button onClick={() => handleUserEmotion(index, opt.id)} key={index} disabled={visible?.disable}><SmileyMeh className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform text-4xl lg:text-5xl animate-screenOpacity`} /></button>
+                        )
+                      } else if (opt.id === 'happy') {
+                        return (
+                          <button onClick={() => handleUserEmotion(index, opt.id)} key={index} disabled={visible?.disable}><Smiley className={`${opt.id === visible?.id ? visible?.color : 'text-gray'} lg:hover:scale-105 lg:transition-transform text-4xl lg:text-5xl animate-screenOpacity`} /></button>
+                        )
+                      }
+                    })}
+                  </>
+                  )}
               </div>
 
               {visible && (

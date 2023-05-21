@@ -11,17 +11,35 @@ import Img from '../../public/usuário.svg'
 import { FormEvent, useEffect, useState } from "react";
 import Input from "@/components/Input";
 import { BrazilStates } from "@/components/BrazilStates";
-import Router from "next/router";
 import UseAuth from "@/hook/useAuth";
 import { User } from "@/core/User";
 import InputRead from "@/components/InputRead";
+import { date_TO_String } from "@/utils";
+import Link from "next/link";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
-  const { user, setUser, updateUser, logout, getUser } = UseAuth()
+  const { user, setUser, updateUser, logout } = UseAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [emotion, setEmotion] = useState('')
+  const [emotionDate, setEmotionDate] = useState('')
   const [birthdate, setBirthdate] = useState('')
+  const date = new Date()
+
+  const formatDate = date_TO_String(date)
+
+  const optionList = [
+    {
+      id: 'sad',
+    },
+    {
+      id: 'neutral',
+    },
+    {
+      id: 'happy',
+    },
+  ]
 
   const handleClickOpen = () => {
       setOpen(true);
@@ -46,13 +64,24 @@ export default function Account() {
 			console.log('erro')
 		}
 	}
+  
+  function handleUserEmotion(){
+    user.emotion?.forEach((emotion) => {
+      (emotion.date == formatDate && emotion.emotion.length != 0) && setEmotion(emotion.emotion)
+    })
+
+    user.emotion?.forEach((emotion) => {
+      (emotion.date == formatDate && emotion.emotion.length != 0) && setEmotionDate(emotion.date)
+    })
+  }
 
 	useEffect(() => {
 		setName(user.name)
     setEmail(user.email)
     setBirthdate(user.birthdate!)
 
-    console.log(user)
+    handleUserEmotion()
+    console.log(emotion)
 	}, [user])
 
   return (
@@ -136,9 +165,33 @@ export default function Account() {
                     </div>
                     <div className="flex flex-col gap-2">                
                         <p className="text-2xl lg:text-5xl">Olá, <br/>{name}!</p>
-                        <div className="flex items-center font-light gap-2">
+                        <div className="flex flex-col lg:flex-row lg:items-center font-light gap-2">
                             <p className="text-sm lg:text-xl">Como eu me sinto hoje?</p>
-                            <Smiley className="text-2xl lg:text-3xl" weight="fill" />
+                            <>                            
+                              {user.emotion?.length == 0 || !emotionDate ? (
+                                <Link href='/'>
+                                  <p className="underline">Responder</p>
+                                </Link>
+                              ) : (
+                                <>                  
+                                  {optionList.map((opt, index) => {
+                                    if (opt.id == emotion && emotion == 'sad') {
+                                      return (
+                                        <SmileySad key={index} className="text-3xl lg:text-4xl" weight="fill" />
+                                      )
+                                    } else if (opt.id == emotion  && emotion == 'neutral') {
+                                      return (
+                                        <SmileyMeh key={index} className="text-3xl lg:text-4xl" weight="fill" />
+                                      )
+                                    } else if (opt.id == emotion  && emotion == 'happy') {
+                                      return (
+                                        <Smiley key={index} className="text-3xl lg:text-4xl" weight="fill" />
+                                      )
+                                    }
+                                  })}
+                                </>
+                              )}
+                            </>
                         </div>
                         <p className="text-sm lg:text-xl font-light">Hábitos completos hoje: 3/7</p>
                     </div>

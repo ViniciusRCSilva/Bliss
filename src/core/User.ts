@@ -1,5 +1,6 @@
 import { DiaryProps } from "./Diary"
 import { EmotionProps } from "./Emotion"
+import { HabitProps } from "./Habit"
 
 export interface UserProps {
 	name: string
@@ -8,6 +9,7 @@ export interface UserProps {
 	state?: string
 	diary?: DiaryProps[]
 	emotion?: EmotionProps[]
+	habit?: HabitProps[]
 }
 
 export class User {
@@ -21,6 +23,7 @@ export class User {
 	get state() { return this._props.state }
 	get diary() { return this._props.diary }
 	get emotion() { return this._props.emotion }
+	get habit() { return this._props.habit }
 
 	clone(props: UserProps) {
 		return new User({

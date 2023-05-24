@@ -52,6 +52,22 @@ export class AuthenticationProvider implements ProviderUserProps {
 		})
 	}
 
+	async createHabit(day: string, hour: string, name: string, user: User): Promise<void> {
+		const userRef = doc(db, "users", user.email)
+		const habitUser = user.habit
+
+		habitUser?.push({
+			day,
+			hour,
+			name,
+			completed: false
+		})
+
+		await updateDoc(userRef, {
+			habit: habitUser
+		})
+	}
+
 	async deleteTextDiary(date: string, user: User): Promise<void> {
 		const userRef = doc(db, "users", user.email)
 		const diaryUser = user.diary
@@ -60,6 +76,17 @@ export class AuthenticationProvider implements ProviderUserProps {
 
 		await updateDoc(userRef, {
 			diary: searchDiary ?? []
+		})
+	}
+
+	async deleteHabit(day: string, hour: string, user: User): Promise<void> {
+		const userRef = doc(db, "users", user.email)
+		const habitUser = user.habit
+
+		const searchHabit = habitUser?.filter(d => d.day !== day && d.hour !== hour)
+
+		await updateDoc(userRef, {
+			habit: searchHabit ?? []
 		})
 	}
 
@@ -122,7 +149,8 @@ export class AuthenticationProvider implements ProviderUserProps {
 							birthdate: doc.data().birthdate,
 							state: doc.data().state ?? '',
 							diary: doc.data().diary ?? [],
-							emotion: doc.data().emotion ?? []
+							emotion: doc.data().emotion ?? [],
+							habit: doc.data().habit ?? []
 						}))
 					})
 				})

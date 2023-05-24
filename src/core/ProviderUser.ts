@@ -5,7 +5,9 @@ export interface ProviderUserProps {
 	loginPassword(email: string, password: string): Promise<User>
 	createUserPassword(email: string, password: string): Promise<void>
 	createTextDiary(text: string, user: User): Promise<void>
+	createHabit(day: string, hour: string, name: string, user: User): Promise<void>
 	deleteTextDiary(date:string, user: User): Promise<void>
+	deleteHabit(day: string, hour: string, user: User): Promise<void>
 	updateUser(user: User): Promise<void>
 	getUser(user: User): Promise<User | false>
 	getUserLogged(cookie: string): Promise<User>
@@ -39,8 +41,16 @@ export class ProviderUser {
 		await this._providerAuthentication.createTextDiary(text, user)
 	}
 
+	async createHabit(day: string, hour: string, name: string, user: User): Promise<void> {
+		await this._providerAuthentication.createHabit(day, hour, name, user)
+	}
+
 	async deleteTextDiary(date:string, user: User): Promise<void> {
 		await this._providerAuthentication.deleteTextDiary(date, user)
+	}
+
+	async deleteHabit(day: string, hour: string, user: User): Promise<void> {
+		await this._providerAuthentication.deleteHabit(day, hour, user)
 	}
 
 	async getUser(user: User): Promise<User | false> {

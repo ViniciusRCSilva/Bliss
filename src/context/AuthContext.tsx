@@ -8,13 +8,16 @@ import { AuthenticationProvider } from "../provider/AuthProvider"
 import { ProviderUser } from "../core/ProviderUser"
 import { Diary } from "@/core/Diary"
 import { Emotion } from "@/core/Emotion"
+import { Habit } from "@/core/Habit"
 
 interface AuthContextProps {
     loginGoogle: () => Promise<void>
     loginPassword(email: string, password: string): Promise<void>
     createUserPassword(name: string, state: string, email: string, password: string, birthdate: string): Promise<void>
     createTextDiary(text: string, user: User): Promise<Diary | void>
+    createHabit(day: string, hour: string, name: string, user: User): Promise<Habit | void>
     deleteTextDiary(date: string, user: User): Promise<void>
+    deleteHabit(day: string, hour: string, user: User): Promise<void>
     updateUser(user: User): Promise<void>
     logout(): Promise<void>
     getUser(user: User): Promise<User | false>
@@ -23,6 +26,7 @@ interface AuthContextProps {
     user: User
     diary: Diary
     emotion: Emotion
+    habit: Habit
     setUser: (value: any) => void
     loading: boolean
     setLoading: any
@@ -33,7 +37,9 @@ const AuthContext = createContext<AuthContextProps>({
     loginPassword: () => Promise.resolve(),
     createUserPassword: () => Promise.resolve(),
     createTextDiary: () => Promise.resolve(),
+    createHabit: () => Promise.resolve(),
     deleteTextDiary: () => Promise.resolve(),
+    deleteHabit: () => Promise.resolve(),
     updateUser: () => Promise.resolve(),
     logout: () => Promise.resolve(),
     getUser: (user: User) => Promise.resolve(user),
@@ -43,13 +49,19 @@ const AuthContext = createContext<AuthContextProps>({
         email: '',
         name: ''
     }),
-    diary: new Diary({
-        text: '',
-        createdAt: ''
-    }),
     emotion: new Emotion({
         emotion: '',
         date: ''
+    }),
+    habit: new Habit({
+        day: '',
+        hour: '',
+        name: '',
+        completed: false
+    }),
+    diary: new Diary({
+        text: '',
+        createdAt: ''
     }),
     setUser: () => { },
     loading: false,
@@ -59,8 +71,9 @@ const AuthContext = createContext<AuthContextProps>({
 export function AuthProvider(props: any) {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState<User>(new User({ email: '', name: '' }))
-    const [diary, setDiary] = useState<Diary>(new Diary({ text: '', createdAt: '' }))
     const [emotion, setEmotion] = useState<Emotion>(new Emotion({ emotion: '', date: '' }))
+    const [habit, setHabit] = useState<Habit>(new Habit({ day: '', hour: '', name: '',completed: false }))
+    const [diary, setDiary] = useState<Diary>(new Diary({ text: '', createdAt: '' }))
     const authentication = new ProviderUser(new AuthenticationProvider())
     const userCookie = Cookie.get('Admin-Bliss')
 
@@ -133,10 +146,26 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
+    async function createHabit(day: string, hour: string, name: string, user: User) {
+        setLoading(true)
+
+        await authentication.createHabit(day, hour, name, user)
+
+        setLoading(false)
+    }
+
     async function deleteTextDiary(date: string, user: User) {
         setLoading(true)
 
         await authentication.deleteTextDiary(date ,user)
+
+        setLoading(false)
+    }
+
+    async function deleteHabit(day: string, hour: string, user: User) {
+        setLoading(true)
+
+        await authentication.deleteHabit(day, hour, user)
 
         setLoading(false)
     }
@@ -200,7 +229,9 @@ export function AuthProvider(props: any) {
         loginPassword,
         createUserPassword,
         createTextDiary,
+        createHabit,
         deleteTextDiary,
+        deleteHabit,
         updateUser,
         logout,
         getUser,
@@ -209,6 +240,7 @@ export function AuthProvider(props: any) {
         user,
         diary,
         emotion,
+        habit,
         setUser,
         loading,
         setLoading

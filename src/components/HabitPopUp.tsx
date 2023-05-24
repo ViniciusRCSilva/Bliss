@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import { useState } from "react";
 import Router from "next/router";
 import Input from "./Input";
+import UseAuth from "@/hook/useAuth";
 
 const weekDays = [
     { short: 'Dom', long: 'Domingo' },
@@ -31,9 +32,13 @@ const examplesList = [
 
 export let dayName = ''
 
-export function Habit(){
+export function HabitPopUp(){
     const [open, setOpen] = useState(false);
     const [day, setDay] = useState('');
+    const [hour, setHour] = useState('');
+    const [habitUser, setHabitUser] = useState('');
+    const [block, setBlock] = useState(false)
+    const { createHabit, user } = UseAuth()
 
     const handleVisualizeDay = (dName: string, weekDay: string) => {
         dayName = dName
@@ -51,8 +56,21 @@ export function Habit(){
     };
     
     const handleClose = () => {
+        setHour('')
+        setHabitUser('')
+        setBlock(false)
         setOpen(false);
     };
+
+    async function handleCreateHabit(){
+        await createHabit(day, hour, habitUser, user)
+    }
+
+    function handleBlock(){
+        user.habit?.map(habit => {
+            (habit.day == day && habit.hour == hour) ? setBlock(true) : setBlock(false)
+        })
+    }
 
     return(
         <>
@@ -94,18 +112,31 @@ export function Habit(){
                             <p className="text-xl font-medium">{day},</p>
 
                             <p>meu novo hábito das:</p>
-                            <Input type="time" icon={<Clock/>} value={undefined} valueChange={() => null} />
+                            <Input type="time" icon={<Clock/>} value={hour} valueChange={setHour} />
 
                             <p>vai ser:</p>
 
-                            <input type="text" placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`} className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg" />
+                            <input onClick={handleBlock} type="text" required value={habitUser} onChange={e => setHabitUser(e.target.value)} placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`} className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg" />
                         </div>
 
+                        {block ? (
+                            <p className="text-red-500 underline text-sm animate-screenOpacity">Já existe um hábito nesse horário!</p>
+                        ): (
+                            <></>
+                        )}
+
                         <div className="flex w-full justify-between items-end">
-                            <button className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
-                                Criar
-                                <Plus weight="bold" className="text-xl" />
-                            </button>
+                            {block ? (
+                                <button onClick={handleCreateHabit} disabled className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md opacity-50 cursor-not-allowed">
+                                    Criar
+                                    <Plus weight="bold" className="text-xl" />
+                                </button>
+                            ) : (
+                                <button onClick={handleCreateHabit} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                    Criar
+                                    <Plus weight="bold" className="text-xl" />
+                                </button>
+                            )}
 
                             <p onClick={handleClose} className="text-gray underline cursor-pointer">Cancelar</p>
                         </div>

@@ -1,12 +1,41 @@
 import { Navigate } from "@/components/Navigate"
 import { Topbar } from "@/components/Topbar"
 
-import { dayName } from "@/components/Habit"
+import { dayName } from "@/components/HabitPopUp"
 import { Task } from "@/components/Task"
 import { X } from "@phosphor-icons/react"
 import Router from "next/router"
+import { useEffect, useState } from "react"
+import UseAuth from "@/hook/useAuth"
+import { NoHabit } from "@/components/NoHabit"
 
 export default function HabitList(){
+    const [day, setDay] = useState('')
+    const [noHabit, setNoHabit] = useState(true)
+    const { user } = UseAuth()
+
+    function handleDayName(){
+        dayName == '' && Router.push('/habits')
+    }
+
+    useEffect(() => {
+        setDay(dayName)
+        setNoHabit(true)
+        handleDayName()
+    }, [])
+
+    function handleNoHabit(){
+        user.habit?.map(habit => {
+            if(habit.day == dayName){
+                return setNoHabit(false)
+            }
+        })
+    }
+
+    useEffect(() => {
+        handleNoHabit()
+    }, [user])
+
     return(
         <div className="animate-screenOpacity">
             <Topbar active="habits" />
@@ -21,24 +50,24 @@ export default function HabitList(){
                     </div>
 
                     <div className="flex flex-col h-[60vh] gap-5 p-2 py-5 lg:p-5 overflow-y-auto scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-lg scrollbar-thumb-green-blue scrollbar-thumb-rounded-lg">
-                        <Task hour="06:00" taskName="Teste" edit={true} />
-                        <Task hour="07:00" taskName="Teste" edit={true} />
-                        <Task hour="08:00" taskName="Teste" edit={true} />
-                        <Task hour="09:00" taskName="Teste" edit={true} />
-                        <Task hour="10:00" taskName="Teste" edit={true} />
-                        <Task hour="11:00" taskName="Teste" edit={true} />
-                        <Task hour="12:00" taskName="Teste" edit={true} />
-                        <Task hour="13:00" taskName="Teste" edit={true} />
-                        <Task hour="14:00" taskName="Teste" edit={true} />
-                        <Task hour="15:00" taskName="Teste" edit={true} />
-                        <Task hour="16:00" taskName="Teste" edit={true} />
-                        <Task hour="17:00" taskName="Teste" edit={true} />
-                        <Task hour="18:00" taskName="Teste" edit={true} />
-                        <Task hour="19:00" taskName="Teste" edit={true} />
-                        <Task hour="20:00" taskName="Teste" edit={true} />
-                        <Task hour="21:00" taskName="Teste" edit={true} />
-                        <Task hour="22:00" taskName="Teste" edit={true} />
-                        <Task hour="23:00" taskName="Teste" edit={true} />
+                        {noHabit ? (
+                            <NoHabit/>
+                        ) : (
+                            <>
+                                {/* obs.: ordenar em ordem crescente */}
+                                {user.habit?.map((habit, i) => {
+                                    if(habit.day == day){
+                                        return(
+                                            <>
+                                                <div key={habit.hour + i}>
+                                                    <Task hour={habit.hour} taskName={habit.name} edit={true} day={dayName} />
+                                                </div>
+                                            </>
+                                        )
+                                    }
+                                })}  
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

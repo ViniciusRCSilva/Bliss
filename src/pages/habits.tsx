@@ -1,4 +1,4 @@
-import { Habit } from "@/components/Habit"
+import { HabitPopUp } from "@/components/HabitPopUp"
 import { Navigate } from "@/components/Navigate"
 import { Topbar } from "@/components/Topbar"
 
@@ -10,7 +10,7 @@ export default function Habits(){
                 <div className="flex flex-col w-[80%] h-full justify-center gap-5">
                     <p className="text-xl">Meus hábitos</p>
 
-                    <Habit/>
+                    <HabitPopUp/>
                 </div>
 
             </div>

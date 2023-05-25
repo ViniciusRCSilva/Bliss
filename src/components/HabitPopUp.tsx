@@ -106,7 +106,7 @@ export function HabitPopUp(){
                 </div>
 
                 <DialogContent>
-                    <div className="flex flex-col justify-center items-start gap-4">
+                    <div onMouseMove={handleBlock} onTouchStart={handleBlock} onTouchEnd={handleBlock} className="flex flex-col justify-center items-start gap-4">
 
                         <div className="flex flex-col w-full gap-4">
                             <p className="text-xl font-medium">{day},</p>
@@ -116,7 +116,7 @@ export function HabitPopUp(){
 
                             <p>vai ser:</p>
 
-                            <input onClick={handleBlock} type="text" required value={habitUser} onChange={e => setHabitUser(e.target.value)} placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`} className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-lg pl-4 placeholder-gray focus:outline-none rounded-lg" />
+                            <input type="text" required value={habitUser} onChange={e => setHabitUser(e.target.value)} placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`} className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-md pl-4 placeholder-gray focus:outline-none rounded-lg" />
                         </div>
 
                         {block ? (
@@ -132,7 +132,7 @@ export function HabitPopUp(){
                                     <Plus weight="bold" className="text-xl" />
                                 </button>
                             ) : (
-                                <button onClick={handleCreateHabit} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                <button onClick={handleCreateHabit} disabled={hour.length == 0 || habitUser.length == 0} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-opacity">
                                     Criar
                                     <Plus weight="bold" className="text-xl" />
                                 </button>

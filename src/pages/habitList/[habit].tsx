@@ -48,7 +48,7 @@ export default function HabitList(){
     
     useEffect(() => {
         handleNoHabit()
-        console.log('Horário dos hábitos asc: ' + user.habit?.map(habit => habit.day == dayName ? habit.hour : null).sort(compareFn));
+        /* console.log('Horário dos hábitos asc: ' + user.habit?.map(habit => habit.day == dayName ? habit.hour : null).sort(compareFn)); */
     }, [user])
 
     return(

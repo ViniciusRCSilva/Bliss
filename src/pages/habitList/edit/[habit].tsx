@@ -3,11 +3,12 @@ import { Topbar } from "@/components/Topbar"
 
 import { dayName } from "@/components/HabitPopUp"
 import { Task } from "@/components/Task"
-import { X } from "@phosphor-icons/react"
+import { CaretLeft, X } from "@phosphor-icons/react"
 import Router from "next/router"
 import { useEffect, useState } from "react"
 import UseAuth from "@/hook/useAuth"
 import { NoHabit } from "@/components/NoHabit"
+import Link from "next/link"
 
 export default function HabitList(){
     const [day, setDay] = useState('')
@@ -41,11 +42,18 @@ export default function HabitList(){
             <Topbar active="habits" />
             <div className="flex flex-col w-full h-screen justify-between items-center pt-16 gap-5 bg-white">
                 <div className="flex flex-col w-[90%] h-full justify-center lg:w-[80%] gap-5">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-evenly lg:justify-between items-center">
+                        <Link href='/habits' className="flex items-center text-gray">
+                            <CaretLeft className="text-sm" weight="bold"/>
+                            <p className="underline">
+                                Voltar
+                            </p>
+                        </Link>
+
                         <p className="text-xl">{dayName}</p>
 
                         <div onClick={() => Router.push('/habits')} className="flex justify-center items-center text-green-blue cursor-pointer gap-1">
-                            <p className="underline">Cancelar edição</p> <X className="text-2xl" />
+                            <p className="underline">Cancelar</p> <X className="text-2xl" />
                         </div>
                     </div>
 

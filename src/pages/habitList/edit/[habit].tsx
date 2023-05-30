@@ -19,6 +19,10 @@ export default function HabitList(){
         dayName == '' && Router.push('/habits')
     }
 
+    const handleViewDay = (weekDay: string) => {
+        Router.push(`/habitList/habit_${weekDay}`)
+    }
+
     useEffect(() => {
         setDay(dayName)
         setNoHabit(true)
@@ -52,8 +56,8 @@ export default function HabitList(){
 
                         <p className="text-xl">{dayName}</p>
 
-                        <div onClick={() => Router.push('/habits')} className="flex justify-center items-center text-green-blue cursor-pointer gap-1">
-                            <p className="underline">Cancelar</p> <X className="text-2xl" />
+                        <div onClick={() => handleViewDay(dayName)} className="flex justify-center items-center w-10 h-10 border-2 border-green-blue rounded-lg cursor-pointer">
+                            <X className="text-3xl text-green-blue" weight="bold" />
                         </div>
                     </div>
 

@@ -7,6 +7,7 @@ import { useState } from "react";
 import Router from "next/router";
 import Input from "./Input";
 import UseAuth from "@/hook/useAuth";
+import { examplesList } from "@/utils";
 
 const weekDays = [
     { short: 'Dom', long: 'Domingo' },
@@ -16,18 +17,6 @@ const weekDays = [
     { short: 'Qui', long: 'Quinta' },
     { short: 'Sex', long: 'Sexta' },
     { short: 'Sáb', long: 'Sábado' },
-]
-
-const examplesList = [
-    'Estudar', 
-    'Comer', 
-    'Dormir', 
-    'Descansar', 
-    'Caminhar', 
-    'Exercitar', 
-    'Ler', 
-    'Ouvir música', 
-    'Trabalhar',
 ]
 
 export let dayName = ''

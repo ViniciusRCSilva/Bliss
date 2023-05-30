@@ -7,6 +7,7 @@ import { auth, db } from '../firebase/config'
 import { ProviderUserProps } from '../core/ProviderUser'
 import { User } from '../core/User'
 import { date_TO_String } from '@/utils'
+import { Habit } from '@/core/Habit'
 
 export class AuthenticationProvider implements ProviderUserProps {
 
@@ -87,6 +88,15 @@ export class AuthenticationProvider implements ProviderUserProps {
 
 		await updateDoc(userRef, {
 			habit: searchHabit ?? []
+		})
+	}
+
+	/* começar a pensar na logica */
+	async updateHabit(habit:Habit, user: User): Promise<void> {
+		const userRef = doc(db, "users", user.email);
+
+		await updateDoc(userRef, {
+			/*  */
 		})
 	}
 

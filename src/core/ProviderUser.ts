@@ -1,3 +1,4 @@
+import { Habit } from "./Habit"
 import { User } from "./User"
 
 export interface ProviderUserProps {
@@ -8,6 +9,7 @@ export interface ProviderUserProps {
 	createHabit(day: string, hour: string, name: string, user: User): Promise<void>
 	deleteTextDiary(date:string, user: User): Promise<void>
 	deleteHabit(day: string, hour: string, user: User): Promise<void>
+	updateHabit(habit: Habit, user: User): Promise<void>
 	updateUser(user: User): Promise<void>
 	getUser(user: User): Promise<User | false>
 	getUserLogged(cookie: string): Promise<User>
@@ -75,6 +77,10 @@ export class ProviderUser {
 		const user = await this._providerAuthentication.getUserLogged(cookie)
 
 		return user
+	}
+
+	async updateHabit(habit: Habit, user: User): Promise<void>{
+		await this._providerAuthentication.updateHabit(habit, user)
 	}
 
 	async updateUser(user: User): Promise<void>{

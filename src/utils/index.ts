@@ -11,9 +11,22 @@ function date_TO_String(date_Object: Date){
 }
 
 
+const examplesList = [
+    'Estudar', 
+    'Comer', 
+    'Dormir', 
+    'Descansar', 
+    'Caminhar', 
+    'Exercitar', 
+    'Ler', 
+    'Ouvir música', 
+    'Trabalhar',
+]
+
 export {
     date_TO_String,
-    getFormat
+    getFormat,
+    examplesList
 }
 
 /* const date = new Date()

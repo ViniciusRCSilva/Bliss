@@ -18,6 +18,7 @@ interface AuthContextProps {
     createHabit(day: string, hour: string, name: string, user: User): Promise<Habit | void>
     deleteTextDiary(date: string, user: User): Promise<void>
     deleteHabit(day: string, hour: string, user: User): Promise<void>
+    updateHabit(habit: Habit, user: User): Promise<void>
     updateUser(user: User): Promise<void>
     logout(): Promise<void>
     getUser(user: User): Promise<User | false>
@@ -40,6 +41,7 @@ const AuthContext = createContext<AuthContextProps>({
     createHabit: () => Promise.resolve(),
     deleteTextDiary: () => Promise.resolve(),
     deleteHabit: () => Promise.resolve(),
+    updateHabit: () => Promise.resolve(),
     updateUser: () => Promise.resolve(),
     logout: () => Promise.resolve(),
     getUser: (user: User) => Promise.resolve(user),
@@ -180,6 +182,10 @@ export function AuthProvider(props: any) {
         return userReceived ? userReceived : false
     }
 
+    async function updateHabit(habit:Habit, user: User) {
+        await authentication.updateHabit(habit, user)
+    }
+
     async function updateUser(user: User) {
         setLoading(true)
 
@@ -232,6 +238,7 @@ export function AuthProvider(props: any) {
         createHabit,
         deleteTextDiary,
         deleteHabit,
+        updateHabit,
         updateUser,
         logout,
         getUser,

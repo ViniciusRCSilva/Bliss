@@ -15,9 +15,9 @@ interface AuthContextProps {
     loginPassword(email: string, password: string): Promise<void>
     createUserPassword(name: string, state: string, email: string, password: string, birthdate: string): Promise<void>
     createTextDiary(text: string, user: User): Promise<Diary | void>
-    createHabit(day: string, hour: string, name: string, user: User): Promise<Habit | void>
+    createHabit(id:string, day: string, hour: string, name: string, user: User): Promise<Habit | void>
     deleteTextDiary(date: string, user: User): Promise<void>
-    deleteHabit(day: string, hour: string, user: User): Promise<void>
+    deleteHabit(id: string, user: User): Promise<void>
     updateHabit(habit: Habit, user: User): Promise<void>
     updateUser(user: User): Promise<void>
     logout(): Promise<void>
@@ -56,6 +56,7 @@ const AuthContext = createContext<AuthContextProps>({
         date: ''
     }),
     habit: new Habit({
+        id: '',
         day: '',
         hour: '',
         name: '',
@@ -74,7 +75,7 @@ export function AuthProvider(props: any) {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState<User>(new User({ email: '', name: '' }))
     const [emotion, setEmotion] = useState<Emotion>(new Emotion({ emotion: '', date: '' }))
-    const [habit, setHabit] = useState<Habit>(new Habit({ day: '', hour: '', name: '',completed: false }))
+    const [habit, setHabit] = useState<Habit>(new Habit({ id: '', day: '', hour: '', name: '',completed: false }))
     const [diary, setDiary] = useState<Diary>(new Diary({ text: '', createdAt: '' }))
     const authentication = new ProviderUser(new AuthenticationProvider())
     const userCookie = Cookie.get('Admin-Bliss')
@@ -148,10 +149,10 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
-    async function createHabit(day: string, hour: string, name: string, user: User) {
+    async function createHabit(id: string, day: string, hour: string, name: string, user: User) {
         setLoading(true)
 
-        await authentication.createHabit(day, hour, name, user)
+        await authentication.createHabit(id, day, hour, name, user)
 
         setLoading(false)
     }
@@ -164,10 +165,10 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
-    async function deleteHabit(day: string, hour: string, user: User) {
+    async function deleteHabit(id: string, user: User) {
         setLoading(true)
 
-        await authentication.deleteHabit(day, hour, user)
+        await authentication.deleteHabit(id, user)
 
         setLoading(false)
     }

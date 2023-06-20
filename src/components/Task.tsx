@@ -12,7 +12,7 @@ import InputRead from "./InputRead";
 import { examplesList } from "@/utils";
 
 interface TaskProps{
-    day?: string
+    id: string
     hour: string
     taskName: string
     edit?: boolean
@@ -33,9 +33,8 @@ export function Task(props: TaskProps){
         setOpen(false);
     };
 
-    /* erro (apaga todos os hábitos daquele dia) */
-    async function handleDeleteHabit(day: string, hour: string){
-        await deleteHabit(day, hour, user)
+    async function handleDeleteHabit(id: string){
+        await deleteHabit(id, user)
         Router.reload()
     }
 
@@ -95,7 +94,7 @@ export function Task(props: TaskProps){
                                     <p className="font-semibold text-lg text-red-500">Exclusão</p>
                                 </div>
                                 <div className="flex items-end gap-1">
-                                    <p>hábito</p>
+                                    <p>do hábito</p>
                                     <p className="text-lg font-semibold">{props.taskName}</p>
                                 </div>
 
@@ -108,7 +107,7 @@ export function Task(props: TaskProps){
                             <div className="flex w-full justify-between items-end">
                                     <div 
                                         className="flex items-center cursor-pointer text-red-500 rounded-lg gap-2"
-                                        onClick={() => handleDeleteHabit(props.day!, props.hour)}
+                                        onClick={() => handleDeleteHabit(props.id)}
                                     >
                                         <TrashSimple weight="bold" />
                                         <p>Excluir</p>

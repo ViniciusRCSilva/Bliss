@@ -72,7 +72,7 @@ export default function HabitList(){
                                         return(
                                             <>
                                                 <div key={habit.hour + i}>
-                                                    <Task hour={habit.hour} taskName={habit.name} edit={true} day={dayName} />
+                                                    <Task id={habit.id} hour={habit.hour} taskName={habit.name} edit={true} />
                                                 </div>
                                             </>
                                         )

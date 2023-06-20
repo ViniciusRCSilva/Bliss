@@ -7,7 +7,7 @@ import { useState } from "react";
 import Router from "next/router";
 import Input from "./Input";
 import UseAuth from "@/hook/useAuth";
-import { examplesList } from "@/utils";
+import { examplesList, get_random_string } from "@/utils";
 
 const weekDays = [
     { short: 'Dom', long: 'Domingo' },
@@ -25,6 +25,7 @@ export function HabitPopUp(){
     const [open, setOpen] = useState(false);
     const [day, setDay] = useState('');
     const [hour, setHour] = useState('');
+    const [id, setId] = useState(get_random_string(20));
     const [habitUser, setHabitUser] = useState('');
     const [block, setBlock] = useState(false)
     const { createHabit, user } = UseAuth()
@@ -52,7 +53,7 @@ export function HabitPopUp(){
     };
 
     async function handleCreateHabit(){
-        await createHabit(day, hour, habitUser, user)
+        await createHabit(id, day, hour, habitUser, user)
     }
 
     function handleBlock(){

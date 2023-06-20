@@ -53,11 +53,12 @@ export class AuthenticationProvider implements ProviderUserProps {
 		})
 	}
 
-	async createHabit(day: string, hour: string, name: string, user: User): Promise<void> {
+	async createHabit(id:string, day: string, hour: string, name: string, user: User): Promise<void> {
 		const userRef = doc(db, "users", user.email)
 		const habitUser = user.habit
 
 		habitUser?.push({
+			id,
 			day,
 			hour,
 			name,
@@ -80,11 +81,11 @@ export class AuthenticationProvider implements ProviderUserProps {
 		})
 	}
 
-	async deleteHabit(day: string, hour: string, user: User): Promise<void> {
+	async deleteHabit(id: string, user: User): Promise<void> {
 		const userRef = doc(db, "users", user.email)
 		const habitUser = user.habit
 
-		const searchHabit = habitUser?.filter(d => d.day !== day && d.hour !== hour)
+		const searchHabit = habitUser?.filter(d => d.id !== id)
 
 		await updateDoc(userRef, {
 			habit: searchHabit ?? []
@@ -94,9 +95,10 @@ export class AuthenticationProvider implements ProviderUserProps {
 	/* começar a pensar na logica */
 	async updateHabit(habit:Habit, user: User): Promise<void> {
 		const userRef = doc(db, "users", user.email);
+		const habitUser = user.habit
 
 		await updateDoc(userRef, {
-			/*  */
+			habit: habit.completed,
 		})
 	}
 

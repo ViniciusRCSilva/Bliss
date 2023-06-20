@@ -10,6 +10,20 @@ function date_TO_String(date_Object: Date){
     return date_String;
 }
 
+const char_set = 'abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+function max_random_number(max: number) {
+    return Math.floor(Math.random() * max);
+}  
+
+function get_random_string(length: number) {
+    let random_string = '';
+    for(let i = 0; i < length; i++) {
+      random_string += char_set[max_random_number(char_set.length - 1)];
+    }
+    
+    return random_string;
+  }
 
 const examplesList = [
     'Estudar', 
@@ -26,7 +40,8 @@ const examplesList = [
 export {
     date_TO_String,
     getFormat,
-    examplesList
+    examplesList,
+    get_random_string
 }
 
 /* const date = new Date()

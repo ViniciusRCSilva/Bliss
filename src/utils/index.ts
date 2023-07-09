@@ -23,7 +23,28 @@ function get_random_string(length: number) {
     }
     
     return random_string;
-  }
+}
+
+function setDayOfWeek(day: string) {
+    switch(day){
+        case "Mon":
+            return "Segunda"
+        case "Tue":
+            return "Terça"
+        case "Wed":
+            return "Quarta"
+        case "Thu":
+            return "Quinta"
+        case "Fri":
+            return "Sexta"
+        case "Sat":
+            return "Sábado"
+        case "Sun":
+            return "Domingo"
+        default:
+            return "Não foi possível capturar o dia"
+    }
+}
 
 const examplesList = [
     'Estudar', 
@@ -41,7 +62,8 @@ export {
     date_TO_String,
     getFormat,
     examplesList,
-    get_random_string
+    get_random_string,
+    setDayOfWeek
 }
 
 /* const date = new Date()

@@ -14,8 +14,9 @@ import { BrazilStates } from "@/components/BrazilStates";
 import UseAuth from "@/hook/useAuth";
 import { User } from "@/core/User";
 import InputRead from "@/components/InputRead";
-import { date_TO_String } from "@/utils";
+import { date_TO_String, setDayOfWeek } from "@/utils";
 import Link from "next/link";
+import Router from "next/router";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
@@ -25,7 +26,10 @@ export default function Account() {
   const [emotion, setEmotion] = useState('')
   const [emotionDate, setEmotionDate] = useState('')
   const [birthdate, setBirthdate] = useState('')
+  const [habits, setHabits] = useState<any>()
   const date = new Date()
+  const [day, setDay] = useState('')
+  const [count, setCount] = useState(0)
 
   const formatDate = date_TO_String(date)
 
@@ -75,13 +79,34 @@ export default function Account() {
     })
   }
 
+  function habitsQuantity() {
+    user.habit?.map(habit => {
+      habit.day == day && 
+        setHabits(
+          <>
+            <p>Total de hábitos de hoje: </p>
+            <p>{}</p>
+          </>
+        )
+    })
+  }
+
 	useEffect(() => {
 		setName(user.name)
     setEmail(user.email)
     setBirthdate(user.birthdate!)
+    setDay(setDayOfWeek(date.toString().split(" ")[0]))
+    setHabits(
+      <>
+        <p>Sem hábitos hoje: </p>
+        <Link href='/habits'>
+          <p className="text-base underline">Criar</p>
+        </Link>
+      </>
+    )
 
+    habitsQuantity()
     handleUserEmotion()
-    console.log(emotion)
 	}, [user])
 
   return (
@@ -193,7 +218,9 @@ export default function Account() {
                               )}
                             </>
                         </div>
-                        <p className="text-sm lg:text-xl font-light">Hábitos completos hoje: 3/7</p>
+                        <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-end text-sm lg:text-xl font-light">
+                            {habits}
+                        </div>
                     </div>
                 </div>
                 

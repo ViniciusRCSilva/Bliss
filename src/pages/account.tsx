@@ -91,7 +91,7 @@ export default function Account() {
       ) : (
         setHabits(
           <>
-            <p>Você tem hábitos no dia de hoje!</p>
+            <p>Você tem hábitos hoje!</p>
           </>
         )
       )
@@ -114,7 +114,7 @@ export default function Account() {
 
       <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-5 bg-white">
         <GreenBg>
-            <div className="flex flex-col w-full gap-5 items-end">
+            <div className="flex flex-col w-full gap-1 lg:gap-5 items-end">
                 <div onClick={handleClickOpen} className="flex items-center gap-3 mr-10 cursor-pointer">                
                     <div className="flex justify-center items-center rounded-full w-10 h-10 bg-white text-green-blue text-3xl">
                         <PencilSimple weight="bold" />
@@ -170,8 +170,9 @@ export default function Account() {
                 </Dialog>
 
                 <div className="flex w-full justify-center items-center gap-5">
-                    <div className="hidden lg:flex flex-col items-center gap-2 pt-5">
-                      <Image src={Img} alt="Imagem frase do dia" width={200} />
+                    <div className="flex flex-col items-center gap-1 lg:gap-2 pt-5">
+                      <Image src={Img} alt="Imagem Usuário" width={200} className="hidden lg:flex" />
+                      <Image src={Img} alt="Imagem Usuário" width={120} className="flex lg:hidden" />
 
                       <div onClick={logout} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
                         <p>Sair</p>
@@ -179,17 +180,9 @@ export default function Account() {
                       </div>
                     </div>
 
-                    <div className="flex lg:hidden flex-col items-center gap-2 pt-5">
-                      <Image src={Img} alt="Imagem frase do dia" width={120} />
-
-                      <div onClick={logout} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
-                        <p>Sair</p>
-                        <Power/>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">                
+                    <div className="flex flex-col gap-1 lg:gap-2">                
                         <p className="text-2xl lg:text-5xl font-medium">Olá, <br/>{name}!</p>
-                        <p className="text-lg lg:text-2xl">Tenha uma ótima {getDayName(date.getDay())}-Feira!</p>
+                        <p className="text-sm lg:text-2xl">Tenha uma ótima {getDayName(date.getDay())}-Feira!</p>
                         <div className="flex flex-col lg:flex-row lg:items-center font-light gap-2">
                             <p className="text-sm lg:text-xl">Como eu me sinto hoje?</p>
                             <>                            
@@ -202,15 +195,15 @@ export default function Account() {
                                   {optionList.map((opt, index) => {
                                     if (opt.id == emotion && emotion == 'sad') {
                                       return (
-                                        <SmileySad key={index} className="text-3xl lg:text-4xl" weight="fill" />
+                                        <SmileySad key={index} className="text-2xl lg:text-4xl" weight="fill" />
                                       )
                                     } else if (opt.id == emotion  && emotion == 'neutral') {
                                       return (
-                                        <SmileyMeh key={index} className="text-3xl lg:text-4xl" weight="fill" />
+                                        <SmileyMeh key={index} className="text-2xl lg:text-4xl" weight="fill" />
                                       )
                                     } else if (opt.id == emotion  && emotion == 'happy') {
                                       return (
-                                        <Smiley key={index} className="text-3xl lg:text-4xl" weight="fill" />
+                                        <Smiley key={index} className="text-2xl lg:text-4xl" weight="fill" />
                                       )
                                     }
                                   })}

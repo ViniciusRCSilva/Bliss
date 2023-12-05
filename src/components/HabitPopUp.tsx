@@ -58,7 +58,13 @@ export function HabitPopUp(){
 
     function handleBlock(){
         user.habit?.map(habit => {
-            (habit.day == day && habit.hour == hour) ? setBlock(true) : setBlock(false)
+            {habit.day == day && (             
+                habit.hour == hour ? (                     
+                    setBlock(true)
+                ) : (
+                    setBlock(false)
+                )
+            )}
         })
     }
 

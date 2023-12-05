@@ -14,9 +14,8 @@ import { BrazilStates } from "@/components/BrazilStates";
 import UseAuth from "@/hook/useAuth";
 import { User } from "@/core/User";
 import InputRead from "@/components/InputRead";
-import { date_TO_String, setDayOfWeek } from "@/utils";
+import { date_TO_String, getDayName, setDayOfWeek } from "@/utils";
 import Link from "next/link";
-import Router from "next/router";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
@@ -29,7 +28,6 @@ export default function Account() {
   const [habits, setHabits] = useState<any>()
   const date = new Date()
   const [day, setDay] = useState('')
-  const [count, setCount] = useState(0)
 
   const formatDate = date_TO_String(date)
 
@@ -81,13 +79,22 @@ export default function Account() {
 
   function habitsQuantity() {
     user.habit?.map(habit => {
-      habit.day == day && 
+      habit.day != getDayName(date.getDay()) ? (
         setHabits(
           <>
-            <p>Total de hábitos de hoje: </p>
-            <p>{}</p>
+            <p>Sem hábitos hoje: </p>
+            <Link href='/habits'>
+              <p className="text-base underline">Criar</p>
+            </Link>
           </>
         )
+      ) : (
+        setHabits(
+          <>
+            <p>Você tem hábitos no dia de hoje!</p>
+          </>
+        )
+      )
     })
   }
 
@@ -96,14 +103,6 @@ export default function Account() {
     setEmail(user.email)
     setBirthdate(user.birthdate!)
     setDay(setDayOfWeek(date.toString().split(" ")[0]))
-    setHabits(
-      <>
-        <p>Sem hábitos hoje: </p>
-        <Link href='/habits'>
-          <p className="text-base underline">Criar</p>
-        </Link>
-      </>
-    )
 
     habitsQuantity()
     handleUserEmotion()
@@ -189,7 +188,8 @@ export default function Account() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">                
-                        <p className="text-2xl lg:text-5xl">Olá, <br/>{name}!</p>
+                        <p className="text-2xl lg:text-5xl font-medium">Olá, <br/>{name}!</p>
+                        <p className="text-lg lg:text-2xl">Tenha uma ótima {getDayName(date.getDay())}-Feira!</p>
                         <div className="flex flex-col lg:flex-row lg:items-center font-light gap-2">
                             <p className="text-sm lg:text-xl">Como eu me sinto hoje?</p>
                             <>                            

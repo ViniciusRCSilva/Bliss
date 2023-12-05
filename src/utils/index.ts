@@ -46,6 +46,27 @@ function setDayOfWeek(day: string) {
     }
 }
 
+function getDayName(day: number) {
+    switch(day){
+        case 1:
+            return "Segunda"
+        case 2:
+            return "Terça"
+        case 3:
+            return "Quarta"
+        case 4:
+            return "Quinta"
+        case 5:
+            return "Sexta"
+        case 6:
+            return "Sábado"
+        case 7:
+            return "Domingo"
+        default:
+            return "Não foi possível capturar o dia"
+    }
+}
+
 const examplesList = [
     'Estudar', 
     'Comer', 
@@ -63,7 +84,8 @@ export {
     getFormat,
     examplesList,
     get_random_string,
-    setDayOfWeek
+    setDayOfWeek,
+    getDayName
 }
 
 /* const date = new Date()

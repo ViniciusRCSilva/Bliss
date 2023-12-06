@@ -10,19 +10,23 @@ import Image from "next/image";
 import PuttingInTrash from '../../public/imagem_lixeira_habito.svg'
 import InputRead from "./InputRead";
 import { examplesList } from "@/utils";
+import Input from "./Input";
+import { Habit } from "@/core/Habit";
 
 interface TaskProps{
     id: string
     hour: string
     taskName: string
+    day: string
     edit?: boolean
     delete?: any
 }
 
 export function Task(props: TaskProps){
-    const { deleteHabit, user } = UseAuth()
+    const { deleteHabit, user, updateHabit } = UseAuth()
     const [open, setOpen] = useState(false);
     const [option, setOption] = useState('');
+    const [taskName, setTaskName] = useState(props.taskName);
 
     const handleClickOpen = (opt: string) => {
         setOption(opt)
@@ -31,12 +35,28 @@ export function Task(props: TaskProps){
     
     const handleClose = () => {
         setOpen(false);
+        setTaskName(props.taskName)
     };
 
     async function handleDeleteHabit(id: string){
         await deleteHabit(id, user)
         Router.reload()
     }
+
+    /* async function handleUpdateHabit(id: string) {
+		if (taskName.length !== 0) {
+			const newHabit = new Habit({
+                id: props.id,
+                day: props.day,
+                hour: props.hour,
+				name: taskName ?? props.taskName,
+                completed: false
+			})
+			await updateHabit(newHabit, user)
+		} else {
+			console.log('erro')
+		}
+	} */
 
     const [opacity, setOpacity] = useState('opacity-30')
 
@@ -125,11 +145,20 @@ export function Task(props: TaskProps){
 
                                 <p>que será:</p>
 
-                                <input type="text" required value={props.taskName} placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`} className="w-full bg-white text-green-dark border-[1px] p-4 border-green-blue shadow-md pl-4 placeholder-gray focus:outline-none rounded-lg" />
+                                <Input 
+                                    type="text" 
+                                    noIcon={true}
+                                    placeholder={`Ex.: ${examplesList[Math.floor(Math.random() * examplesList.length)]}...`}  
+                                    value={taskName} 
+                                    valueChange={setTaskName} 
+                                />
                             </div>
 
                             <div className="flex w-full justify-between items-end">
-                                <button disabled={props.taskName.length == 0} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-opacity">
+                                <button 
+                                    /* onClick={() => handleUpdateHabit(props.id)} */
+                                    disabled={props.taskName.length == 0} 
+                                    className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-opacity">
                                     Editar
                                     <PencilSimple weight="bold" className="text-xl" />
                                 </button>

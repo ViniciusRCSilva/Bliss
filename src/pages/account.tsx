@@ -77,7 +77,7 @@ export default function Account() {
     })
   }
 
-  function habitsQuantity() {
+  function hasHabits() {
     user.habit?.map(habit => {
       habit.day != getDayName(date.getDay()) ? (
         setHabits(
@@ -104,7 +104,7 @@ export default function Account() {
     setBirthdate(user.birthdate!)
     setDay(setDayOfWeek(date.toString().split(" ")[0]))
 
-    habitsQuantity()
+    hasHabits()
     handleUserEmotion()
 	}, [user])
 

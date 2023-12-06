@@ -173,6 +173,14 @@ export function AuthProvider(props: any) {
         setLoading(false)
     }
 
+    async function updateHabit(habit: Habit, user: User) {
+        setLoading(true)
+
+        await authentication.updateHabit(habit, user)
+
+        setLoading(false)
+    }
+
     async function getUser(user: User) {
         setLoading(true)
 
@@ -181,10 +189,6 @@ export function AuthProvider(props: any) {
         setLoading(false)
 
         return userReceived ? userReceived : false
-    }
-
-    async function updateHabit(habit:Habit, user: User) {
-        await authentication.updateHabit(habit, user)
     }
 
     async function updateUser(user: User) {

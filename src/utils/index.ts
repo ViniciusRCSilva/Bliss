@@ -67,6 +67,27 @@ function getDayName(day: number) {
     }
 }
 
+function messageDayAccount(day: number) {
+    switch(day){
+        case 1:
+            return "Tenha uma ótima Segunda-Feira!"
+        case 2:
+            return "Tenha uma ótima Terça-Feira!"
+        case 3:
+            return "Tenha uma ótima Quarta-Feira!"
+        case 4:
+            return "Tenha uma ótima Quinta-Feira!"
+        case 5:
+            return "Tenha uma ótima Sexta-Feira!"
+        case 6:
+            return "Tenha um ótimo Sábado!"
+        case 7:
+            return "Tenha um ótimo Domingo!"
+        default:
+            return "Não foi possível capturar o dia!"
+    }
+}
+
 const examplesList = [
     'Estudar', 
     'Comer', 
@@ -85,7 +106,8 @@ export {
     examplesList,
     get_random_string,
     setDayOfWeek,
-    getDayName
+    getDayName,
+    messageDayAccount
 }
 
 /* const date = new Date()

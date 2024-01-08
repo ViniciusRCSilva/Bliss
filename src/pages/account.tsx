@@ -1,7 +1,6 @@
 import { GreenBg } from "@/components/GreenBg";
-import { LinkUser } from "@/components/LinksUser";
 import { Topbar } from "@/components/Topbar";
-import { ArrowsCounterClockwise, Baby, BookBookmark, Check, EnvelopeSimple, House, Password, PencilSimple, Phone, Power, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
+import { Baby, Check, EnvelopeSimple, Eye, Password, PencilSimple, PlusCircle, Power, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
 import Image from "next/image";
 
 import Dialog from '@mui/material/Dialog';
@@ -14,8 +13,9 @@ import { BrazilStates } from "@/components/BrazilStates";
 import UseAuth from "@/hook/useAuth";
 import { User } from "@/core/User";
 import InputRead from "@/components/InputRead";
-import { date_TO_String, getDayName, setDayOfWeek } from "@/utils";
+import { date_TO_String, getDayName, messageDayAccount, setDayOfWeek } from "@/utils";
 import Link from "next/link";
+import { Navigate } from "@/components/Navigate";
 
 export default function Account() {
   const [open, setOpen] = useState(false);
@@ -79,19 +79,25 @@ export default function Account() {
 
   function hasHabits() {
     user.habit?.map(habit => {
+      console.log(habit.day == getDayName(date.getDay()))
       habit.day != getDayName(date.getDay()) ? (
         setHabits(
           <>
-            <p>Sem hábitos hoje: </p>
-            <Link href='/habits'>
-              <p className="text-base underline">Criar</p>
+            <p className="text-2xl font-medium">Sem hábitos hoje: </p>
+            <Link href='/habits' className="flex items-center gap-2">
+              <PlusCircle className="text-4xl text-green-blue"/>
+              <p className="text-green-blue text-xl">Criar</p>
             </Link>
           </>
         )
       ) : (
         setHabits(
           <>
-            <p>Você tem hábitos hoje!</p>
+            <p className="text-2xl font-medium">Você tem hábitos hoje!</p>
+            <Link href='/habits' className="flex items-center gap-2">
+              <Eye className="text-4xl text-green-blue" />
+              <p className="text-green-blue text-xl">Visualizar</p>
+            </Link>
           </>
         )
       )
@@ -112,7 +118,7 @@ export default function Account() {
     <div className="animate-screenOpacity">
       <Topbar active="account" />
 
-      <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-5 bg-white">
+      <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-10 bg-white">
         <GreenBg>
             <div className="flex flex-col w-full gap-1 lg:gap-5 items-end">
                 <div onClick={handleClickOpen} className="flex items-center gap-3 mr-10 cursor-pointer">                
@@ -182,38 +188,7 @@ export default function Account() {
 
                     <div className="flex flex-col gap-1 lg:gap-2">                
                         <p className="text-2xl lg:text-5xl font-medium">Olá, <br/>{name}!</p>
-                        <p className="text-sm lg:text-2xl">Tenha uma ótima {getDayName(date.getDay())}-Feira!</p>
-                        <div className="flex flex-col lg:flex-row lg:items-center font-light gap-2">
-                            <p className="text-sm lg:text-xl">Como eu me sinto hoje?</p>
-                            <>                            
-                              {user.emotion?.length == 0 || !emotionDate ? (
-                                <Link href='/'>
-                                  <p className="underline">Responder</p>
-                                </Link>
-                              ) : (
-                                <>                  
-                                  {optionList.map((opt, index) => {
-                                    if (opt.id == emotion && emotion == 'sad') {
-                                      return (
-                                        <SmileySad key={index} className="text-2xl lg:text-4xl" weight="fill" />
-                                      )
-                                    } else if (opt.id == emotion  && emotion == 'neutral') {
-                                      return (
-                                        <SmileyMeh key={index} className="text-2xl lg:text-4xl" weight="fill" />
-                                      )
-                                    } else if (opt.id == emotion  && emotion == 'happy') {
-                                      return (
-                                        <Smiley key={index} className="text-2xl lg:text-4xl" weight="fill" />
-                                      )
-                                    }
-                                  })}
-                                </>
-                              )}
-                            </>
-                        </div>
-                        <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-end text-sm lg:text-xl font-light">
-                            {habits}
-                        </div>
+                        <p className="text-sm lg:text-2xl">{messageDayAccount(date.getDay())}</p>
                     </div>
                 </div>
                 
@@ -223,19 +198,53 @@ export default function Account() {
         <div className="flex flex-col w-full lg:w-[50%] lg:h-full justify-evenly items-center">
           <div className="flex w-full lg:h-[90%] lg:items-center justify-center">
             <div className="flex flex-col w-[80%] items-center gap-5">
-              <p className="text-xl text-center lg:text-2xl">Navegue pelas outras páginas:</p>
-
-                <div className="flex flex-col items-start gap-3">
-                    <LinkUser link="" icon={<House />} linkName="Início" />
-                    <LinkUser link="habits" icon={<ArrowsCounterClockwise />} linkName="Hábitos" />
-                    <LinkUser link="diary" icon={<BookBookmark />} linkName="Diário" />
-                    <LinkUser link="contacts" icon={<Phone />} linkName="Contatos de ajuda" />
+                <div className="flex flex-col items-center gap-10">
+                  <div className="flex flex-col items-center font-light gap-2">
+                    <p className="text-2xl font-medium">Como eu me sinto hoje?</p>
+                    <>                            
+                      {user.emotion?.length == 0 || !emotionDate ? (
+                        <Link href='/'>
+                          <p className="underline text-green-blue">Responder</p>
+                        </Link>
+                      ) : (
+                        <Link href='/' className="flex items-center gap-2 text-xl">                  
+                          {optionList.map((opt, index) => {
+                            if (opt.id == emotion && emotion == 'sad') {
+                              return (
+                                <>
+                                  <SmileySad key={index} className="text-4xl text-green-blue" />
+                                  <p className="text-green-blue">Triste</p>
+                                </>
+                              )
+                            } else if (opt.id == emotion  && emotion == 'neutral') {
+                              return (
+                                <>
+                                  <SmileyMeh key={index} className="text-4xl text-green-blue" />
+                                  <p className="text-green-blue">Neutro</p>
+                                </>
+                              )
+                            } else if (opt.id == emotion  && emotion == 'happy') {
+                              return (
+                                <>
+                                  <Smiley key={index} className="text-4xl text-green-blue" />
+                                  <p className="text-green-blue">Feliz</p>
+                                </>
+                              )
+                            }
+                          })}
+                        </Link>
+                      )}
+                    </>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 text-sm lg:text-xl font-light">
+                    {habits}
+                  </div>
                 </div>
             </div>
           </div>
         </div>
-
       </div>
+      <Navigate />
     </div>
   )
 }

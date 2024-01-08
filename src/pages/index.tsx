@@ -131,8 +131,8 @@ export default function Home() {
                     if (opt.id == emotion && emotion == 'sad') {
                       return (
                         <div key={index} className="flex flex-col justify-center items-center gap-2">                        
-                          <div className="flex items-center gap-2 animate-screenOpacity">
-                            <SmileySad className="text-green-blue text-4xl lg:text-5xl" />
+                          <div className="flex items-center gap-2 animate-screenOpacity text-green-blue">
+                            <SmileySad className="text-4xl lg:text-5xl" />
                             <p className="font-light">Triste</p>
                           </div>
 
@@ -144,8 +144,8 @@ export default function Home() {
                     } else if (opt.id == emotion && emotion == 'neutral') {
                       return (
                         <div key={index} className="flex flex-col justify-center items-center gap-2">                        
-                          <div className="flex items-center gap-2 animate-screenOpacity">
-                            <SmileyMeh className="text-green-blue text-4xl lg:text-5xl" />
+                          <div className="flex items-center gap-2 animate-screenOpacity text-green-blue">
+                            <SmileyMeh className="text-4xl lg:text-5xl" />
                             <p className="font-light">Neutro</p>
                           </div>
 
@@ -157,8 +157,8 @@ export default function Home() {
                     } else if (opt.id == emotion && emotion == 'happy') {
                       return (
                         <div key={index} className="flex flex-col justify-center items-center gap-2">                        
-                          <div className="flex items-center gap-2 animate-screenOpacity">
-                            <Smiley className="text-green-blue text-4xl lg:text-5xl" />
+                          <div className="flex items-center gap-2 animate-screenOpacity text-green-blue">
+                            <Smiley className="text-4xl lg:text-5xl" />
                             <p className="font-light">Feliz</p>
                           </div>
 

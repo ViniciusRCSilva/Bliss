@@ -72,8 +72,9 @@ export function HabitPopUp(){
         <>
             {weekDays.map((weekDay, i) => {
                 return(
-                    <div className="flex w-full justify-between" key={`${weekDay}-${i}`}>
-                        <p className="text-xl p-3">{weekDay.short}</p>
+                    <div className="flex w-full justify-between items-center" key={`${weekDay}-${i}`}>
+                        <p className="hidden lg:flex text-xl p-3">{weekDay.long}</p>
+                        <p className="flex lg:hidden text-xl p-3">{weekDay.short}</p>
             
                         <div className="flex items-center justify-center border-2 border-green-blue rounded-lg p-2">
                             <div onClick={() => handleClickOpen(weekDay.long)} className="flex items-center gap-1 cursor-pointer pr-3 border-r-2 border-green-blue">

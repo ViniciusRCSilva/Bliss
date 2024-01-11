@@ -88,6 +88,18 @@ function messageDayAccount(day: number) {
     }
 }
 
+function messageGreetings(hour: number) {
+    if(hour >= 6 && hour < 12) {
+        return "Bom dia"
+    } else {
+        if(hour >= 12 && hour < 18) {
+            return "Boa tarde"
+        } else {
+            return "Boa noite"
+        }
+    }
+}
+
 const examplesList = [
     'Estudar', 
     'Comer', 
@@ -107,7 +119,8 @@ export {
     get_random_string,
     setDayOfWeek,
     getDayName,
-    messageDayAccount
+    messageDayAccount,
+    messageGreetings
 }
 
 /* const date = new Date()

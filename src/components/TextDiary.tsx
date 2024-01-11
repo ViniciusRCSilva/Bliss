@@ -14,7 +14,7 @@ export function TextsDiary() {
                         {user.diary?.map((diary, i) => {
                             return(
                                 <div 
-                                    className="flex w-full items-center justify-between p-2 px-4 border-2 border-green-blue rounded-lg animate-screenOpacity shadow-md"
+                                    className="flex w-full items-center justify-between p-2 px-4 border-2 border-green-blue rounded-lg animate-screenOpacity"
                                     key={i}
                                 >
                                     <TextBox createdAt={diary.createdAt} text={diary.text} />

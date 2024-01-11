@@ -1,6 +1,6 @@
 import { GreenBg } from "@/components/GreenBg";
 import { Topbar } from "@/components/Topbar";
-import { Baby, Check, EnvelopeSimple, Eye, Password, PencilSimple, PlusCircle, Power, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
+import { Baby, Check, EnvelopeSimple, Eye, Password, PencilSimple, PlusCircle, ShareFat, SignOut, Smiley, SmileyMeh, SmileySad, SmileyWink, X } from "@phosphor-icons/react";
 import Image from "next/image";
 
 import Dialog from '@mui/material/Dialog';
@@ -13,7 +13,7 @@ import { BrazilStates } from "@/components/BrazilStates";
 import UseAuth from "@/hook/useAuth";
 import { User } from "@/core/User";
 import InputRead from "@/components/InputRead";
-import { date_TO_String, getDayName, messageDayAccount, setDayOfWeek } from "@/utils";
+import { date_TO_String, getDayName, messageDayAccount, messageGreetings, setDayOfWeek } from "@/utils";
 import Link from "next/link";
 import { Navigate } from "@/components/Navigate";
 
@@ -83,9 +83,9 @@ export default function Account() {
       habit.day != getDayName(date.getDay()) ? (
         setHabits(
           <>
-            <p className="text-2xl font-medium">Sem hábitos hoje: </p>
+            <p className="text-xl lg:text-2xl font-medium">Sem hábitos hoje: </p>
             <Link href='/habits' className="flex items-center gap-2">
-              <PlusCircle className="text-4xl text-green-blue"/>
+              <PlusCircle className="text-2xl lg:text-4xl text-green-blue"/>
               <p className="text-green-blue text-xl">Criar</p>
             </Link>
           </>
@@ -93,9 +93,9 @@ export default function Account() {
       ) : (
         setHabits(
           <>
-            <p className="text-2xl font-medium">Você tem hábitos hoje!</p>
+            <p className="text-xl lg:text-2xl font-medium">Você tem hábitos hoje!</p>
             <Link href='/habits' className="flex items-center gap-2">
-              <Eye className="text-4xl text-green-blue" />
+              <Eye className="text-2xl lg:text-4xl text-green-blue" />
               <p className="text-green-blue text-xl">Visualizar</p>
             </Link>
           </>
@@ -121,11 +121,11 @@ export default function Account() {
       <div className="flex flex-col lg:flex-row w-full h-screen items-center pt-16 gap-10 bg-white">
         <GreenBg>
             <div className="flex flex-col w-full gap-1 lg:gap-5 items-end">
-                <div onClick={handleClickOpen} className="flex items-center gap-3 mr-10 cursor-pointer">                
-                    <div className="flex justify-center items-center rounded-full w-10 h-10 bg-white text-green-blue text-3xl">
-                        <PencilSimple weight="bold" />
+                <div onClick={handleClickOpen} className="flex items-center mr-10 cursor-pointer">                
+                    <div className="flex justify-center items-center rounded-full w-10 h-10 lg:hover:w-auto gap-3 lg:hover:p-3 bg-white text-green-blue group transition-all">
+                        <p className="hidden lg:group-hover:flex">Edite seu perfil</p>
+                        <PencilSimple className="text-3xl" weight="bold" />
                     </div>
-                    <p className="hidden lg:flex underline">Edite seu perfil</p>
                 </div>
 
                 <Dialog
@@ -182,12 +182,12 @@ export default function Account() {
 
                       <div onClick={logout} className="flex items-center justify-center p-2 bg-white text-green-blue gap-2 rounded-md cursor-pointer">
                         <p>Sair</p>
-                        <Power/>
+                        <SignOut/>
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-1 lg:gap-2">                
-                        <p className="text-2xl lg:text-5xl font-medium">Olá, <br/>{name}!</p>
+                    <div className="flex flex-col gap-1 lg:gap-2">           
+                        <p className="text-2xl lg:text-5xl font-medium">{messageGreetings(date.getHours())}, <br/>{name}!</p>
                         <p className="text-sm lg:text-2xl">{messageDayAccount(date.getDay())}</p>
                     </div>
                 </div>
@@ -200,11 +200,12 @@ export default function Account() {
             <div className="flex flex-col w-[80%] items-center gap-5">
                 <div className="flex flex-col items-center gap-10">
                   <div className="flex flex-col items-center font-light gap-2">
-                    <p className="text-2xl font-medium">Como eu me sinto hoje?</p>
+                    <p className="text-xl lg:text-2xl font-medium">Como eu me sinto hoje?</p>
                     <>                            
                       {user.emotion?.length == 0 || !emotionDate ? (
-                        <Link href='/'>
-                          <p className="underline text-green-blue">Responder</p>
+                        <Link href='/' className="flex items-center gap-2">
+                          <ShareFat className="text-2xl lg:text-4xl text-green-blue"/>
+                          <p className="text-green-blue text-xl">Responder</p>
                         </Link>
                       ) : (
                         <Link href='/' className="flex items-center gap-2 text-xl">                  

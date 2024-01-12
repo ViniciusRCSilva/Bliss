@@ -25,7 +25,7 @@ export default function Account() {
   const [emotion, setEmotion] = useState('')
   const [emotionDate, setEmotionDate] = useState('')
   const [birthdate, setBirthdate] = useState('')
-  const [habits, setHabits] = useState<any>()
+  const [habits, setHabits] = useState(false)
   const date = new Date()
   const [day, setDay] = useState('')
 
@@ -77,30 +77,12 @@ export default function Account() {
     })
   }
 
-  function hasHabits() {
+  function setTodayHabitTrue() {
     user.habit?.map(habit => {
-      console.log(habit.day == getDayName(date.getDay()))
-      habit.day != getDayName(date.getDay()) ? (
-        setHabits(
-          <>
-            <p className="text-xl lg:text-2xl font-medium">Sem hábitos hoje: </p>
-            <Link href='/habits' className="flex items-center gap-2">
-              <PlusCircle className="text-2xl lg:text-4xl text-green-blue"/>
-              <p className="text-green-blue text-xl">Criar</p>
-            </Link>
-          </>
-        )
-      ) : (
-        setHabits(
-          <>
-            <p className="text-xl lg:text-2xl font-medium">Você tem hábitos hoje!</p>
-            <Link href='/habits' className="flex items-center gap-2">
-              <Eye className="text-2xl lg:text-4xl text-green-blue" />
-              <p className="text-green-blue text-xl">Visualizar</p>
-            </Link>
-          </>
-        )
-      )
+      console.log("habit day: " + habit.day)
+      console.log("today's name: " + getDayName(date.getDay()))
+      habit.day == getDayName(date.getDay()) ? setHabits(true) : setHabits(false)
+      console.log("const habits: " + habits)
     })
   }
 
@@ -110,7 +92,7 @@ export default function Account() {
     setBirthdate(user.birthdate!)
     setDay(setDayOfWeek(date.toString().split(" ")[0]))
 
-    hasHabits()
+    setTodayHabitTrue()
     handleUserEmotion()
 	}, [user])
 
@@ -238,7 +220,23 @@ export default function Account() {
                     </>
                   </div>
                   <div className="flex flex-col items-center gap-2 text-sm lg:text-xl font-light">
-                    {habits}
+                    {habits ? (
+                      <>
+                        <p className="text-xl lg:text-2xl font-medium">Você tem hábitos hoje!</p>
+                        <Link href='/habits' className="flex items-center gap-2">
+                          <Eye className="text-2xl lg:text-4xl text-green-blue" />
+                          <p className="text-green-blue text-xl">Visualizar</p>
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-xl lg:text-2xl font-medium">Sem hábitos hoje: </p>
+                        <Link href='/habits' className="flex items-center gap-2">
+                          <PlusCircle className="text-2xl lg:text-4xl text-green-blue"/>
+                          <p className="text-green-blue text-xl">Criar</p>
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
             </div>

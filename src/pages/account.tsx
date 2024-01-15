@@ -66,7 +66,7 @@ export default function Account() {
 			console.log('erro')
 		}
 	}
-  
+
   function handleUserEmotion(){
     user.emotion?.forEach((emotion) => {
       (emotion.date == formatDate && emotion.emotion.length != 0) && setEmotion(emotion.emotion)
@@ -126,7 +126,12 @@ export default function Account() {
                                     <PencilSimple className="text-2xl text-green-blue" />
                                   </div>
 
-                                  <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value={name} valueChange={setName} />
+                                  <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value={name} valueChange={setName} maxLength={20} />
+                                  {name.length == 20 ? (
+                                    <p className="text-sm text-red-600 font-light">* Limite de 20 caracteres!</p>
+                                  ) : (
+                                    <></>
+                                  )}
                                   <BrazilStates/>
                                   <div className="flex flex-col w-full">
                                     <p>Data de nascimento</p>

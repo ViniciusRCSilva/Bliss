@@ -6,6 +6,7 @@ interface InputProps{
     disabled?: boolean
     value: any
     valueChange: (value: any) => void
+    maxLength?: number
 }
 
 export default function Input(props: InputProps) {
@@ -25,7 +26,7 @@ export default function Input(props: InputProps) {
                         {props.icon}
                     </div>
 
-                    <input type={props.type} value={props.value ?? ''} onChange={e => handleChangeValue(e.target.value)} disabled={props.disabled} placeholder={props.placeholder} required className="w-[80%] bg-white text-green-dark pl-4 placeholder-gray focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed" />
+                    <input type={props.type} value={props.value ?? ''} onChange={e => handleChangeValue(e.target.value)} disabled={props.disabled} placeholder={props.placeholder} maxLength={props.maxLength} required className="w-[80%] bg-white text-green-dark pl-4 placeholder-gray focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed" />
                 </div>
             )}
         </>

@@ -76,7 +76,12 @@ export default function Register() {
                     <p className="font-light text-xl">CADASTRO</p>
 
                     <div className="flex flex-col gap-5">
-                        <Input icon={<SmileyWink />} type="text" placeholder="Nome" value={name} valueChange={setName} />
+                        <Input icon={<SmileyWink />} type="text" placeholder="Nome" value={name} valueChange={setName} maxLength={20} />
+                        {name.length == 20 ? (
+                                <p className="text-sm text-red-600 font-light">* Limite de 20 caracteres!</p>
+                            ) : (
+                                <></>
+                        )}
 
                         <Input icon={<EnvelopeSimple />} type="email" placeholder="Email" value={email} valueChange={setEmail} />
 

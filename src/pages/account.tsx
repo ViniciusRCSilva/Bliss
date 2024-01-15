@@ -127,8 +127,13 @@ export default function Account() {
                                   </div>
 
                                   <Input icon={<SmileyWink/>} type="text" placeholder="Nome" value={name} valueChange={setName} maxLength={20} />
+                                  {name.length == 0 ? (
+                                    <p className="text-sm text-red-600 font-light animate-screenOpacity">* O campo não pode estar vazio!</p>
+                                  ) : (
+                                    <></>
+                                  )}
                                   {name.length == 20 ? (
-                                    <p className="text-sm text-red-600 font-light">* Limite de 20 caracteres!</p>
+                                    <p className="text-sm text-red-600 font-light animate-screenOpacity">* Limite de 20 caracteres!</p>
                                   ) : (
                                     <></>
                                   )}
@@ -147,10 +152,17 @@ export default function Account() {
                               </div>
 
                               <div className="flex w-full justify-between items-end">
-                                  <button onClick={handleCreateSubmit} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
-                                      Salvar
-                                      <Check weight="bold" className="text-xl" />
-                                  </button>
+                                  {name.length == 20 || name.length == 0 ? (
+                                    <button disabled className="flex items-center bg-green-blue disabled:opacity-50 transition-opacity rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                        Salvar
+                                        <Check weight="bold" className="text-xl" />
+                                    </button>
+                                  ) : (
+                                    <button onClick={handleCreateSubmit} className="flex items-center bg-green-blue rounded-lg px-4 py-2 text-xl text-white gap-2 shadow-md">
+                                        Salvar
+                                        <Check weight="bold" className="text-xl" />
+                                    </button>
+                                  )}
 
                                   <p onClick={handleClose} className="text-gray underline cursor-pointer">Cancelar</p>
                               </div>

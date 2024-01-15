@@ -77,12 +77,9 @@ export default function Account() {
     })
   }
 
-  function setTodayHabitTrue() {
+  function setTodayHabit() {
     user.habit?.map(habit => {
-      console.log("habit day: " + habit.day)
-      console.log("today's name: " + getDayName(date.getDay()))
-      habit.day == getDayName(date.getDay()) ? setHabits(true) : setHabits(false)
-      console.log("const habits: " + habits)
+      habit.day === getDayName(date.getDay()) && setHabits(true)
     })
   }
 
@@ -92,7 +89,7 @@ export default function Account() {
     setBirthdate(user.birthdate!)
     setDay(setDayOfWeek(date.toString().split(" ")[0]))
 
-    setTodayHabitTrue()
+    setTodayHabit()
     handleUserEmotion()
 	}, [user])
 
